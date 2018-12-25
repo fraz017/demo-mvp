@@ -1,0 +1,71 @@
+
+    <div class="upload-btn-wrapper">
+        <button class="btn">Capture an image</button>
+        <input type="file" accept="image/*" id="file-input" capture="environment" name="image-code" />
+    </div>
+
+<script>
+    var id = ""
+    if (window.requestIdleCallback) {
+        requestIdleCallback(function () {
+            Fingerprint2.get({}, function (components) {
+                var values = components.map(function (component) { return component.value })
+                id = Fingerprint2.x64hash128(values.join(''), 31)
+                
+            })
+        })
+    } else {
+        setTimeout(function () {
+            Fingerprint2.get({}, function (components) {
+                var values = components.map(function (component) { return component.value })
+                id = Fingerprint2.x64hash128(values.join(''), 31)
+            })  
+        }, 500)
+    }
+
+    const fileInput = document.getElementById('file-input');
+
+    fileInput.addEventListener('change', (e) => {
+        console.log(e.target.files)
+        var fileInput = document.querySelector('input[type=file]');
+        var attachment = e.target.files[0];
+
+        var formData = new FormData(); 
+        formData.append('id', id);
+        formData.append('image', attachment, 'filename.jpg');
+
+        $.ajax({
+            url: '/recognize',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false
+        });
+    });
+</script>
+
+<style>
+    .upload-btn-wrapper {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+    }
+
+.btn {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+</style>
