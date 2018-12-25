@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>
+        Lays Admin
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+    <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'admin', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="">
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                <a href="javascript:void(0)" class="simple-text logo-mini">
+                    LA
+                </a>
+                <a href="javascript:void(0)" class="simple-text logo-normal">
+                    Lays Admin
+                </a>
+                </div>
+                <ul class="nav">
+                    <li class="active ">
+                        <a href="/admin/dashboard">
+                        <i class="tim-icons icon-chart-pie-36"></i>
+                        <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <!--
+                    <li>
+                        <a href="./icons.html">
+                        <i class="tim-icons icon-atom"></i>
+                        <p>Icons</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./map.html">
+                        <i class="tim-icons icon-pin"></i>
+                        <p>Maps</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./notifications.html">
+                        <i class="tim-icons icon-bell-55"></i>
+                        <p>Notifications</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./user.html">
+                        <i class="tim-icons icon-single-02"></i>
+                        <p>User Profile</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./tables.html">
+                        <i class="tim-icons icon-puzzle-10"></i>
+                        <p>Table List</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./typography.html">
+                        <i class="tim-icons icon-align-center"></i>
+                        <p>Typography</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./rtl.html">
+                        <i class="tim-icons icon-world"></i>
+                        <p>RTL Support</p>
+                        </a>
+                    </li>
+                    <li class="active-pro">
+                        <a href="./upgrade.html">
+                        <i class="tim-icons icon-spaceship"></i>
+                        <p>Upgrade to PRO</p>
+                        </a>
+                    </li>
+                    -->
+                </ul>
+            </div>
+        </div>
+        <%= yield %>
+    </div>
+
+  </body>
+</html>
