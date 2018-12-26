@@ -1,4 +1,3 @@
-require 'net/http'
 class WelcomeController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:recognize]
 
@@ -31,7 +30,9 @@ class WelcomeController < ApplicationController
     # image_data = Base64.decode64(data['data:image/jpeg;base64,'.length .. -1])
     # new_file=File.new(Time.now.to_i, 'wb')
     # new_file.write(image_data)
+    puts "*************   Before  *************"
     image = MiniMagick::Image.open(file.path)
+    puts "*************   After  *************"
     image.resize "500x500"
     found = find(image)
     if !found
