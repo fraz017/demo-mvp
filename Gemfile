@@ -38,7 +38,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'aws-sdk'
-gem 'mini_magick'
+gem 'mini_magick', '~> 4.2', '>= 4.2.4'
 gem 'therubyracer'
 gem 'execjs'
 
