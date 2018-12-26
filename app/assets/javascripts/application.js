@@ -11,6 +11,8 @@
 // about supported directives.
 //
 //= require rails-ujs
+//= require jquery.min
 //= require activestorage
 //= require turbolinks
 //= require fingerprint
+

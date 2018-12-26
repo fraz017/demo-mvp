@@ -12,7 +12,7 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require admin/jquery.min
+//= require jquery.min
 //= require admin/popper.min
 //= require admin/bootstrap.min
 //= require admin/perfect-scrollbar.jquery.min
