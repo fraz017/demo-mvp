@@ -5,6 +5,7 @@ class WelcomeController < ApplicationController
   end
 
   def recognize
+    puts "*************   Before  *************"
     # cloudKey = "f2fe7867ebe7e5926d6aaa36e0478081"
     # cloudSecret = "jvmFnUk8BFRkENthhmCQdrocahT1DTZf1cFtCJw80b7LYlWD3iQR2fQyzLs1pc59OjfxUESQcQGyRlVCqsdNsd0oiuWmonJCJHuThKVBx8lX7BiXYLAekSEsj9ZMr9j7"
     # cloudUrl = "http://00e7bae37b68f3cf44b5fcff939b79af.na1.crs.easyar.com:8080/search"
