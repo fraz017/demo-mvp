@@ -39,7 +39,7 @@ class WelcomeController < ApplicationController
     end
     found = find(image)
     if found
-      render json: {url: "https://www.google.com"}
+      render json: {url: "http://layslanded.visidots.com"}
     else
       render json: {}
     end
