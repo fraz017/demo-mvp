@@ -12,7 +12,10 @@
 //
 //= require rails-ujs
 //= require jquery.min
+//= require admin/popper.min
+//= require admin/bootstrap.min
 //= require activestorage
 //= require turbolinks
 //= require fingerprint
+//= require welcome
 
