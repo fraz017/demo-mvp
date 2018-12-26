@@ -17,5 +17,4 @@
 //= require activestorage
 //= require turbolinks
 //= require fingerprint
-//= require welcome
 
