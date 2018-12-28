@@ -1,3 +1,11 @@
+ <% flash.each do |key, value| %>
+    <div class="text-center flash <%= key %> alert-primary">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        <%= value %>
+    </div>
+<% end %>
 <div class="row">
     <div class="col-md-12">
         <div class="card ">

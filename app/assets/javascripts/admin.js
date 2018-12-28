@@ -19,5 +19,4 @@
 //= require admin/chartjs.min
 //= require admin/bootstrap-notify
 //= require admin/black-dashboard.min
-//= require admin/demo
 //= require admin/dashboard

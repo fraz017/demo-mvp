@@ -35,8 +35,8 @@
             <button id="snap">Snap Photo</button>
             <canvas id="canvas" width="640" height="480"></canvas> --!>
             <div class="show-sm">
-                <div class="alert alert-danger">
-                    <strong>Logo</strong> not recognized. Please try again!
+                <div class="msg-alert alert alert-danger">
+                    
                 </div>
                 <h5 class="text-center pl-3 mb-3">Click Button Below to Scan</h5>
                 <div class="button-wrapper">
@@ -125,7 +125,7 @@ $(document).ready(function() {
 
         var file = e.target.files[0];
         var id = Cookies.get("deviceID");
-         
+
         var formData = new FormData();
         formData.append('id', id);
         formData.append('image', file, 'filename.jpg');
@@ -141,7 +141,8 @@ $(document).ready(function() {
                     window.location.href = data.url;
                 }
                 else{
-                    $(".alert").fadeIn(300).delay(2500).fadeOut(400);
+                    $(".msg-alert").html(data.msg)
+                    $(".msg-alert").fadeIn(300).delay(2500).fadeOut(400);
                 }
                 $(".overlay").hide();
             },
