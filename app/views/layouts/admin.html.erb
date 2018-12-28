@@ -21,7 +21,17 @@
         <%= render 'layouts/sidebar' %>
         <div class="main-panel">
             <%= render 'layouts/header' %>
-            <%= yield %>
+            <div class="content">
+              <% flash.each do |key, value| %>
+                <div class="text-center flash <%= key %> alert-primary">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <%= value %>
+                </div>
+              <% end %>
+              <%= yield %>
+            </div>
             <%= render 'layouts/footer' %>
         </div>
     </div>

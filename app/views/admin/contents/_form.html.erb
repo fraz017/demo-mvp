@@ -1,0 +1,48 @@
+<div class="container py-5">
+
+  <div class="row justify-content-sm-center py-5">
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-header text-center">
+          <h4 class="title">Create New Content</h4>
+        </div>
+        <%= form_for([:admin, @content]) do |f| %>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6 col-sm-12 offset-lg-3">
+                <div class="form-group">
+                  <% if @content.errors.any? %>
+                    <ul>
+                      <% @content.errors.full_messages.each do |msg| %>
+                        <li><%= msg %></li>
+                      <% end %>
+                    </ul>
+                  <% end %>
+                </div>
+              </div>
+              <div class="col-lg-6 col-sm-12 offset-lg-3">
+                <div class="form-group">
+                  <label>Name</label>
+                  <%= f.text_field :name, placeholder: "Name", class: "form-control" %>
+                </div>
+              </div>
+              <div class="col-lg-6 col-sm-12 offset-lg-3">
+                <div class="form-group">
+                  <label>Redirect Url</label>
+                  <%= f.text_field :url, placeholder: "Url", class: "form-control" %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div>
+              <div class="col-lg-6 col-sm-12 offset-lg-3">
+                <%= f.submit nil, class: "btn btn-fill btn-primary" %>  
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
