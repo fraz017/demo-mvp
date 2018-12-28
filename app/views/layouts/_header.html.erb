@@ -68,7 +68,7 @@
               </li>
               <li class="dropdown-divider"></li>
               <li class="nav-link">
-                <a href="javascript:void(0)" class="nav-item dropdown-item">Log out</a>
+                <%= link_to('Log out', destroy_user_session_path, method: :delete, class: "nav-item dropdown-item") %>
               </li>
             </ul>
           </li>
