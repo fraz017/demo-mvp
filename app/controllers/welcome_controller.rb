@@ -44,6 +44,8 @@ class WelcomeController < ApplicationController
       found = find(image)
       if found
         @track.create(device_id: params[:id])
+        url = Content.first&.url
+        url = "http://layslanded.visidots.com" if url.nil?
         render json: {url: "http://layslanded.visidots.com"}
       else
         render json: {msg: "<strong>Logo</strong> not recognized. Please try again!"}
