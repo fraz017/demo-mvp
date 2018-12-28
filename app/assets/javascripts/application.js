@@ -17,4 +17,5 @@
 //= require activestorage
 //= require turbolinks
 //= require fingerprint
+//= require cookie.min
 

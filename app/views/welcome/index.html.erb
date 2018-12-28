@@ -63,6 +63,7 @@ $(document).ready(function() {
             Fingerprint2.get({}, function (components) {
                 var values = components.map(function (component) { return component.value })
                 id = Fingerprint2.x64hash128(values.join(''), 31)
+                setCookies(id);
 
             })
         })
@@ -71,6 +72,7 @@ $(document).ready(function() {
             Fingerprint2.get({}, function (components) {
                 var values = components.map(function (component) { return component.value })
                 id = Fingerprint2.x64hash128(values.join(''), 31)
+                setCookies(id);
             })
         }, 500)
     }
@@ -122,7 +124,8 @@ $(document).ready(function() {
         console.log(e.target.files)
 
         var file = e.target.files[0];
-
+        var id = Cookies.get("deviceID");
+         
         var formData = new FormData();
         formData.append('id', id);
         formData.append('image', file, 'filename.jpg');
@@ -147,6 +150,16 @@ $(document).ready(function() {
             }
         });
     });
+
+    function setCookies(id){
+        if (Cookies.get('deviceID')){
+            id = Cookies.get('deviceID');
+            console.log(id)
+        }
+        else{
+            Cookies.set('deviceID', id)
+        }
+    }
 });
 
 </script>
