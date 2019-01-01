@@ -29,19 +29,19 @@ class WelcomeController < ApplicationController
     # image_data = Base64.decode64(data['data:image/jpeg;base64,'.length .. -1])
     # new_file=File.new(Time.now.to_i, 'wb')
     # new_file.write(image_data)
-    
     @track = TrackView.where(device_id: params[:id], created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
     if @track.present?
       render json: {msg: "<strong>Content</strong> has already been viewed. Please try again tomorrow"}
     elsif
       file = params[:image]# code like this  data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABPUAAAI9CAYAAABSTE0XAAAgAElEQVR4Xuy9SXPjytKm6ZwnUbNyHs7Jc7/VV9bW1WXWi9q
-      image = MiniMagick::Image.open(file.path)
-      image.resize "500x500"
-      found = find(image)
+      image1 = MiniMagick::Image.open(file.path)
+      image2 = MiniMagick::Image.open(file.path)
+      image1.rotate '90'
+      # image.resize "500x500"
+      found = find(image1)
       if !found
-        image.rotate '90'
+        found = find(image2)
       end
-      found = find(image)
       if found
         @track.create(device_id: params[:id])
         url = Content.first&.url

@@ -37,7 +37,7 @@ $(document).ready(function() {
 
                     // Resize the image
                     var canvas = document.createElement('canvas'),
-                        max_size = 544,// TODO : pull max size from a site config
+                        max_size = 500,// TODO : pull max size from a site config
                         width = image.width,
                         height = image.height;
                     if (width > height) {
@@ -107,16 +107,17 @@ $(document).ready(function() {
                 data: formData,
                 contentType: false,
                 processData: false,
-                success: function(data){
-                    if (data.url){
+                success: function (data) {
+                    if (data.url) {
                         window.location.href = data.url;
                     }
-                    else{
-                        $(".alert").fadeIn(300).delay(2500).fadeOut(400);
+                    else {
+                        $(".msg-alert").html(data.msg)
+                        $(".msg-alert").fadeIn(300).delay(2500).fadeOut(400);
                     }
                     $(".overlay").hide();
                 },
-                error: function(data){
+                error: function (data) {
                     $(".overlay").hide();
                 }
             });

@@ -18,4 +18,5 @@
 //= require turbolinks
 //= require fingerprint
 //= require cookie.min
+//= require welcome
 
