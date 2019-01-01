@@ -10,4 +10,9 @@ class Admin::DashboardController < AdminController
       @data[index] = v
     end
   end
+
+  def destroy_data
+    TrackView.destroy_all
+    redirect_to admin_contents_path, alert: "Data has been reset"
+  end
 end

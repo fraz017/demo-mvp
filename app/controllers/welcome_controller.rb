@@ -29,11 +29,22 @@ class WelcomeController < ApplicationController
     # image_data = Base64.decode64(data['data:image/jpeg;base64,'.length .. -1])
     # new_file=File.new(Time.now.to_i, 'wb')
     # new_file.write(image_data)
-    @track = TrackView.where(device_id: params[:id], created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+    limit = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
+    restriction = Restriction.first 
+    if restriction.present?
+      if restriction.unit == "minutes"
+        limit = restriction.limit.minutes.ago..Time.zone.now
+      elsif restriction.unit == "days"
+        limit = restriction.limit.days.ago..Time.zone.now
+      else
+        limit = restriction.limit.hours.ago..Time.zone.now
+      end 
+    end
+    @track = TrackView.where(device_id: params[:id], created_at: limit)
     if @track.present?
-      render json: {msg: "<strong>Content</strong> has already been viewed. Please try again tomorrow"}
+      render json: {msg: "<strong>Content</strong> has already been viewed. Please try again in #{restriction.limit} #{restriction.unit}"}
     elsif
-      file = params[:image]# code like this  data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABPUAAAI9CAYAAABSTE0XAAAgAElEQVR4Xuy9SXPjytKm6ZwnUbNyHs7Jc7/VV9bW1WXWi9q
+      file = params[:image]
       image1 = MiniMagick::Image.open(file.path)
       image2 = MiniMagick::Image.open(file.path)
       image1.rotate '90'
@@ -52,9 +63,7 @@ class WelcomeController < ApplicationController
       end
     end
   end
-
-
-
+  
   private
   def find(image)
     found = false
