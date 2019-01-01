@@ -29,14 +29,14 @@
               </div>
               <div class="col-lg-6 col-sm-12 offset-lg-3">
                 <div class="form-group">
-                  <label>Limit</label>
+                  <label>Time</label>
                   <%= f.number_field :limit, placeholder: "Limit", class: "form-control", min: 1 %>
                 </div>
               </div>
               <div class="col-lg-6 col-sm-12 offset-lg-3">
                 <div class="form-group">
-                  <label>Select Time</label>
-                  <%= f.select :unit, options_for_select([["Select a Time", ""], ["minutes", "minutes"], ["hours", "hours"], ["days", "days"]], @restriction.unit), {}, class: 'form-control' %>
+                  <label>Select Period</label>
+                  <%= f.select :unit, options_for_select([["Select a Period", ""], ["minutes", "minutes"], ["hours", "hours"], ["days", "days"]], @restriction.unit), {}, class: 'form-control' %>
                 </div>
               </div>
             </div>
