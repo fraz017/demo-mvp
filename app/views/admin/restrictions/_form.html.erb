@@ -1,19 +1,26 @@
+<style>
+  select option{
+    background: #27293d;
+  }
+</style>
+
+
 <div class="container py-5">
 
   <div class="row justify-content-sm-center py-5">
     <div class="col-sm-8">
       <div class="card">
         <div class="card-header text-center">
-          <h4 class="title">Create New Redirect</h4>
+          <h4 class="title">Add Reset Time</h4>
         </div>
-        <%= form_for([:admin, @content]) do |f| %>
+        <%= form_for([:admin, @restriction]) do |f| %>
           <div class="card-body">
             <div class="row">
               <div class="col-lg-6 col-sm-12 offset-lg-3">
                 <div class="form-group">
-                  <% if @content.errors.any? %>
+                  <% if @restriction.errors.any? %>
                     <ul>
-                      <% @content.errors.full_messages.each do |msg| %>
+                      <% @restriction.errors.full_messages.each do |msg| %>
                         <li><%= msg %></li>
                       <% end %>
                     </ul>
@@ -22,14 +29,14 @@
               </div>
               <div class="col-lg-6 col-sm-12 offset-lg-3">
                 <div class="form-group">
-                  <label>Name</label>
-                  <%= f.text_field :name, placeholder: "Name", class: "form-control" %>
+                  <label>Limit</label>
+                  <%= f.number_field :limit, placeholder: "Limit", class: "form-control", min: 1 %>
                 </div>
               </div>
               <div class="col-lg-6 col-sm-12 offset-lg-3">
                 <div class="form-group">
-                  <label>Redirect Url</label>
-                  <%= f.text_field :url, placeholder: "Url", class: "form-control" %>
+                  <label>Select Time</label>
+                  <%= f.select :unit, options_for_select([["Select a Time", ""], ["minutes", "minutes"], ["hours", "hours"], ["days", "days"]], @restriction.unit), {}, class: 'form-control' %>
                 </div>
               </div>
             </div>

@@ -8,7 +8,6 @@ class Admin::ContentsController < AdminController
 
   def new
     @content = Content.new
-    @restriction = Restriction.new
   end
 
   def create
@@ -16,7 +15,6 @@ class Admin::ContentsController < AdminController
     if @content.save
       redirect_to admin_contents_path, alert: "Content Created"
     else
-      @restriction = Restriction.new
       render 'new'
     end
   end
@@ -28,7 +26,6 @@ class Admin::ContentsController < AdminController
     if @content.update_attributes(content_params)
       redirect_to admin_contents_path, alert: "Content Updated"
     else
-      @restriction = Restriction.last ||= Restriction.new
       render 'edit'
     end
   end
@@ -45,7 +42,6 @@ class Admin::ContentsController < AdminController
 
   def find_content
     @content = Content.find params[:id]
-    @restriction = Restriction.last ||= Restriction.new
   end
 
 end

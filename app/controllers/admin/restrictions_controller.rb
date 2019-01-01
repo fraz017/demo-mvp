@@ -10,7 +10,6 @@ class Admin::RestrictionsController < AdminController
     if @restriction.save
       redirect_to admin_contents_path, alert: "Restriction Created"
     else
-      @content = Content.new  
       render 'admin/contents/new'
     end
   end
@@ -21,8 +20,7 @@ class Admin::RestrictionsController < AdminController
   def update
     if @restriction.update_attributes(restriction_params)
       redirect_to admin_contents_path, alert: "Restriction Updated"
-    else
-      @content = Content.find params[:id]  
+    else 
       render 'admin/contents/edit'
     end
   end
@@ -38,7 +36,7 @@ class Admin::RestrictionsController < AdminController
   end
 
   def find_content
-    @restriction = Restriction.first ||= Restriction.new
+    @restriction = Restriction.find params[:id]
   end
 
 end

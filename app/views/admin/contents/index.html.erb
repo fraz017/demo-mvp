@@ -60,8 +60,8 @@
     <div class="col-md-12">
         <div class="card ">
             <div class="card-header">
-                <h4 class="card-title float-left"> Available Limits</h4>
-                <%= link_to "Add New Limits", new_admin_content_path, class: "btn btn-primary float-right" %>
+                <h4 class="card-title float-left"> Available Reset Time</h4>
+                <%= link_to "Add Reset Time", new_admin_restriction_path, class: "btn btn-primary float-right" %>
             </div>
             <div class="card-body">
             <div class="table-responsive">
@@ -82,14 +82,14 @@
                                     <%= content.limit %> <%= content.unit %>
                                 </td>
                                 <td class="text-center">
-                                    <%= link_to "<i class='tim-icons icon-pencil'></i>".html_safe, edit_admin_content_path(content), class: "btn btn-warning" %>
+                                    <%= link_to "<i class='tim-icons icon-pencil'></i>".html_safe, edit_admin_restriction_path(content), class: "btn btn-warning" %>
                                     <%= link_to "<i class='tim-icons icon-trash-simple'></i>".html_safe, [:admin, content], class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
                                 </td>
                             </tr>
                         <% end %>
                         <%if @restrictions.count == 0 %>
                             <tr>
-                                <td colspan="3"> No Restrictions Available </td>
+                                <td colspan="3"> No Reset Time Available </td>
                             </tr>
                         <% end %>
                     </tbody>
