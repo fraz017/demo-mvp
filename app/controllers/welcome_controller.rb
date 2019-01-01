@@ -42,7 +42,7 @@ class WelcomeController < ApplicationController
     end
     @track = TrackView.where(device_id: params[:id], created_at: limit)
     if @track.present?
-      render json: {msg: "<strong>Content</strong> has already been viewed. Please try again in #{restriction.limit} #{restriction.unit}"}
+      render json: {msg: "<strong>Content</strong> has already been viewed. Please try again later"}
     elsif
       file = params[:image]
       image1 = MiniMagick::Image.open(file.path)
@@ -63,7 +63,7 @@ class WelcomeController < ApplicationController
       end
     end
   end
-  
+
   private
   def find(image)
     found = false
