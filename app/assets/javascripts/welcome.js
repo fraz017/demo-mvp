@@ -112,10 +112,10 @@ $(document).ready(function() {
                         window.location.href = data.url;
                     }
                     else {
+                        $(".overlay").hide();
                         $(".msg-alert").html(data.msg)
                         $(".msg-alert").fadeIn(300).delay(2500).fadeOut(400);
                     }
-                    $(".overlay").hide();
                 },
                 error: function (data) {
                     $(".overlay").hide();
