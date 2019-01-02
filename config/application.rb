@@ -17,7 +17,7 @@ module Lays
     # the framework and any gems in your application.
 
     config.time_zone = 'Central Time (US & Canada)'
-    config.active_record.default_timezone = :local
+    config.active_record.default_timezone = :utc
     config.to_prepare do
       # Configure single controller layout
       Devise::SessionsController.layout "login"
