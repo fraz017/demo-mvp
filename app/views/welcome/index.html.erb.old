@@ -1,0 +1,62 @@
+
+    <div class="main-body">
+        <div class="overlay">
+            <div class="inner-body-loading">
+                <%= image_tag "loading.gif", class: "img-fluid" %>
+            </div>
+        </div>
+        <div class="inner-body">
+            <div class="show-md">
+                <h2 class="text-left pl-3">How does the demo works?</h2>
+                <div class="img-text">
+                    <div class="row">
+                        <div class="col-md-4 ">
+                            <div class="border-img">
+                                <%= image_tag "image.png", class: "img-fluid" %>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="text-left px-3 py-4">
+                                <h2>Try our mobile web demo</h2>
+                                <p>                        
+                                    Take your phone.
+                                </p>
+                                <p>
+                                    Click the scan lays logo button, 
+                                    then direct your phone to this image on the left.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <video id="video" width="640" height="480" autoplay></video>
+            <button id="snap">Snap Photo</button>
+            <canvas id="canvas" width="640" height="480"></canvas> --!>
+            <div class="show-sm">
+                <div class="msg-alert alert alert-danger">
+                    
+                </div>
+                <h5 class="text-center pl-3 mb-3">Click Button Below to Scan</h5>
+                <div class="button-wrapper">
+                    <span class="label">
+                       <%= image_tag "image.png", class: "btn-img" %> 
+                       <span class="lable-text"> Scan Lays Logo</span>
+                    </span>
+                    <form id="image-form" method="post" action="/recognize">
+                        <input type="file" accept="image/*" id="file-input" capture="environment" name="image-code" class="upload-box upload" placeholder="Upload File">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) { 
+        $(".scan-icon").show();
+        $(".deskktop").hide();
+    }
+    else{
+        $(".scan-icon").hide();
+        $(".deskktop").show();
+    }
