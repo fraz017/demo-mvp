@@ -101,13 +101,11 @@ $(document).ready(function() {
                     video.srcObject = stream;
                     video.play();
                     $(".app__layout").show();
-                    $(".bg-lays").animate({
-                        width: "toggle"
-                    });
+                    $(".bg-lays").hide();
                     setTimeout(function () {
                         context.drawImage(video, 0, 0, 300, 300);
                         triggerCallback()
-                    }, 3000);
+                    }, 5000);
 
                     mediaStream = stream;
                     mediaStream.stop = function () {
