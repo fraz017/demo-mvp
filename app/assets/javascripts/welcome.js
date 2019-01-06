@@ -105,7 +105,7 @@ $(document).ready(function() {
                     setTimeout(function () {
                         context.drawImage(video, 0, 0, 300, 300);
                         triggerCallback()
-                    }, 5000);
+                    }, 4000);
 
                     mediaStream = stream;
                     mediaStream.stop = function () {
