@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    var latitude = 0.0;
+    var longitude = 0.0;
     $(".overlay").hide();
     $(".alert").hide();
     var id = ""
@@ -19,56 +21,131 @@ $(document).ready(function() {
         }, 500)
     }
 
-    var fileInput = document.getElementById('file-input');
+    if (navigator && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        alert("error")
+    }
 
-    fileInput.addEventListener('change', (e) => {
-        console.log(e.target.files)
+    function showPosition(position) {
+        latitude =  position.coords.latitude;
+        longitude = position.coords.longitude;
+    }
 
-        var file = e.target.files[0];
+    // var fileInput = document.getElementById('file-input');
 
-        if (file.type.match(/image.*/)) {
-            console.log('An image has been loaded');
+    // fileInput.addEventListener('change', (e) => {
+    //     console.log(e.target.files)
 
-            // Load the image
-            var reader = new FileReader();
-            reader.onload = function (readerEvent) {
-                var image = new Image();
-                image.onload = function (imageEvent) {
+    //     var file = e.target.files[0];
 
-                    // Resize the image
-                    var canvas = document.createElement('canvas'),
-                        max_size = 300,// TODO : pull max size from a site config
-                        width = image.width,
-                        height = image.height;
-                    if (width > height) {
-                        if (width > max_size) {
-                            height *= max_size / width;
-                            width = max_size;
-                        }
-                    } else {
-                        if (height > max_size) {
-                            width *= max_size / height;
-                            height = max_size;
-                        }
-                    }
-                    canvas.width = width;
-                    canvas.height = height;
-                    canvas.getContext('2d').drawImage(image, 0, 0, width, height);
-                    var dataUrl = canvas.toDataURL('image/jpeg');
-                    var resizedImage = dataURLToBlob(dataUrl);
+    //     if (file.type.match(/image.*/)) {
+    //         console.log('An image has been loaded');
 
-                    $.event.trigger({
-                        type: "imageResized",
-                        blob: resizedImage,
-                        url: dataUrl
+    //         // Load the image
+    //         var reader = new FileReader();
+    //         reader.onload = function (readerEvent) {
+    //             var image = new Image();
+    //             image.onload = function (imageEvent) {
+
+    //                 // Resize the image
+    //                 var canvas = document.createElement('canvas'),
+    //                     max_size = 300,// TODO : pull max size from a site config
+    //                     width = image.width,
+    //                     height = image.height;
+    //                 if (width > height) {
+    //                     if (width > max_size) {
+    //                         height *= max_size / width;
+    //                         width = max_size;
+    //                     }
+    //                 } else {
+    //                     if (height > max_size) {
+    //                         width *= max_size / height;
+    //                         height = max_size;
+    //                     }
+    //                 }
+    //                 canvas.width = width;
+    //                 canvas.height = height;
+    //                 canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+    //                 var dataUrl = canvas.toDataURL('image/jpeg');
+    //                 var resizedImage = dataURLToBlob(dataUrl);
+
+    //                 $.event.trigger({
+    //                     type: "imageResized",
+    //                     blob: resizedImage,
+    //                     url: dataUrl
+    //                 });
+
+    //             }
+    //             image.src = readerEvent.target.result;
+    //         }
+    //         reader.readAsDataURL(file);
+    //     }
+    // });
+
+    var mediaStream = null;
+
+
+    $(function () {
+        var image = $("#logo");
+        $(".app__layout").hide();
+        image.click(function () {
+            $(".bg-lays").animate({
+                width: "toggle"
+            });
+            $(".app__layout").show();
+            if( /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) { 
+                var video = document.getElementById('video');
+                var canvas = document.getElementById('canvas');
+                var context = canvas.getContext('2d');
+                // Get access to the camera!
+                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                    // Not adding `{ audio: true }` since we only want video now 
+                    navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } }).then(function (stream) {
+                        //video.src = window.URL.createObjectURL(stream);
+                        video.srcObject = stream;
+                        video.play();
+                        setTimeout(function () {
+                            context.drawImage(video, 0, 0, 300, 300);
+                            triggerCallback()
+                        }, 3000);
+
+                        mediaStream = stream;
+                        mediaStream.stop = function () {
+                            this.getAudioTracks().forEach(function (track) {
+                                track.stop();
+                            });
+                            this.getVideoTracks().forEach(function (track) { //in case... :)
+                                track.stop();
+                            });
+                        };
                     });
-
                 }
-                image.src = readerEvent.target.result;
+                // Trigger photo take
             }
-            reader.readAsDataURL(file);
-        }
+        });
     });
+
+    if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        $(".scan-icon").show();
+        $(".deskktop").hide();
+    }
+    else {
+        $(".scan-icon").hide();
+        $(".deskktop").show();
+    }
+
+    function triggerCallback() {
+        var canvas = document.getElementById('canvas');
+        var dataUrl = canvas.toDataURL('image/jpeg');
+        var resizedImage = dataURLToBlob(dataUrl);
+
+        $.event.trigger({
+            type: "imageResized",
+            blob: resizedImage,
+            url: dataUrl
+        });
+    }
 
     var dataURLToBlob = function (dataURL) {
         var BASE64_MARKER = ';base64,';
@@ -95,10 +172,17 @@ $(document).ready(function() {
     }
 
     $(document).on("imageResized", function (event) {
-        var data = new FormData($("form[id*='uploadImageForm']")[0]);
+        mediaStream.stop();
+        // var data = new FormData($("form[id*='uploadImageForm']")[0]);
+        $(".app__layout").animate({
+            width: "toggle"
+        });
+        $(".bg-lays").show()
         if (event.blob && event.url) {
             var formData = new FormData();
             formData.append('id', id);
+            formData.append('latitude', latitude);
+            formData.append('longitude', longitude);
             formData.append('image', event.blob, 'filename.jpg');
             $(".overlay").show();
             $.ajax({

@@ -9,6 +9,7 @@ class Admin::DashboardController < AdminController
     views = TrackView.group_by_day(:created_at, range: 1.month.ago..Time.zone.now, time_zone: Time.zone.name, format: "%d %b").count
     @month = views.keys
     @monthdata = views.values
+    @ids = TrackView.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
   end
 
   def destroy_data

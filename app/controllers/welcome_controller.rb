@@ -54,7 +54,7 @@ class WelcomeController < ApplicationController
         found = find(image2)
       end
       if found
-        @track.create(device_id: params[:id])
+        @track.create(device_id: params[:id], latitude: params[:latitude], longitude: params[:longitude])
         url = Content.first&.url
         url = "http://layslanded.visidots.com" if url.nil?
         render json: {url: url}
