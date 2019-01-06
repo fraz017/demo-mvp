@@ -94,35 +94,33 @@ $(document).ready(function() {
                 width: "toggle"
             });
             $(".app__layout").show();
-            if( /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) { 
-                var video = document.getElementById('video');
-                var canvas = document.getElementById('canvas');
-                var context = canvas.getContext('2d');
-                // Get access to the camera!
-                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                    // Not adding `{ audio: true }` since we only want video now 
-                    navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } }).then(function (stream) {
-                        //video.src = window.URL.createObjectURL(stream);
-                        video.srcObject = stream;
-                        video.play();
-                        setTimeout(function () {
-                            context.drawImage(video, 0, 0, 300, 300);
-                            triggerCallback()
-                        }, 3000);
+            var video = document.getElementById('video');
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            // Get access to the camera!
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                // Not adding `{ audio: true }` since we only want video now 
+                navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } }).then(function (stream) {
+                    //video.src = window.URL.createObjectURL(stream);
+                    video.srcObject = stream;
+                    video.play();
+                    setTimeout(function () {
+                        context.drawImage(video, 0, 0, 300, 300);
+                        triggerCallback()
+                    }, 3000);
 
-                        mediaStream = stream;
-                        mediaStream.stop = function () {
-                            this.getAudioTracks().forEach(function (track) {
-                                track.stop();
-                            });
-                            this.getVideoTracks().forEach(function (track) { //in case... :)
-                                track.stop();
-                            });
-                        };
-                    });
-                }
-                // Trigger photo take
+                    mediaStream = stream;
+                    mediaStream.stop = function () {
+                        this.getAudioTracks().forEach(function (track) {
+                            track.stop();
+                        });
+                        this.getVideoTracks().forEach(function (track) { //in case... :)
+                            track.stop();
+                        });
+                    };
+                });
             }
+            // Trigger photo take
         });
     });
 
