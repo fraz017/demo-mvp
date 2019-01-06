@@ -100,10 +100,10 @@ $(document).ready(function() {
                     //video.src = window.URL.createObjectURL(stream);
                     video.srcObject = stream;
                     video.play();
+                    $(".app__layout").show();
                     $(".bg-lays").animate({
                         width: "toggle"
                     });
-                    $(".app__layout").show();
                     setTimeout(function () {
                         context.drawImage(video, 0, 0, 300, 300);
                         triggerCallback()
@@ -172,10 +172,10 @@ $(document).ready(function() {
     $(document).on("imageResized", function (event) {
         mediaStream.stop();
         // var data = new FormData($("form[id*='uploadImageForm']")[0]);
+        $(".bg-lays").show()
         $(".app__layout").animate({
             width: "toggle"
         });
-        $(".bg-lays").show()
         if (event.blob && event.url) {
             var formData = new FormData();
             formData.append('id', id);
