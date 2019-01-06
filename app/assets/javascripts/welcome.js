@@ -101,7 +101,9 @@ $(document).ready(function() {
                     video.srcObject = stream;
                     video.play();
                     $(".app__layout").show();
-                    $(".bg-lays").hide();
+                    $(".bg-lays").animate({
+                        width: "toggle"
+                    });
                     setTimeout(function () {
                         context.drawImage(video, 0, 0, 300, 300);
                         triggerCallback()
