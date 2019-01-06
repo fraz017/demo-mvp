@@ -90,10 +90,6 @@ $(document).ready(function() {
         var image = $("#logo");
         $(".app__layout").hide();
         image.click(function () {
-            $(".bg-lays").animate({
-                width: "toggle"
-            });
-            $(".app__layout").show();
             var video = document.getElementById('video');
             var canvas = document.getElementById('canvas');
             var context = canvas.getContext('2d');
@@ -104,6 +100,10 @@ $(document).ready(function() {
                     //video.src = window.URL.createObjectURL(stream);
                     video.srcObject = stream;
                     video.play();
+                    $(".bg-lays").animate({
+                        width: "toggle"
+                    });
+                    $(".app__layout").show();
                     setTimeout(function () {
                         context.drawImage(video, 0, 0, 300, 300);
                         triggerCallback()
