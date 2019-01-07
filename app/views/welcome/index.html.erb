@@ -14,9 +14,9 @@
     <div class="scan-icon">
         <div class="msg-alert alert alert-danger">      
         </div>
-        <a href="javascript:void(0)" id="logo"><%= image_tag "logo.png", width: "250" %></a>
+        <button id="logo"><%= image_tag "logo.png", width: "250" %></button>
         <a href="http://layslanded.visidots.com/help/" class="help"><span class="info">i</span> Need help?</a>
-        <input type="button" id="file-input" class="upload-box upload" placeholder="Upload File" style="display:none;">
+        <input type="file" capture="environment" accept="image/*" id="file-input" class="upload-box upload" placeholder="Upload File" style="display:none;">
     </div>
 </section>
 <footer>

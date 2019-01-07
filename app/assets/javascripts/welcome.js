@@ -35,12 +35,11 @@ $(document).ready(function() {
     // var fileInput = document.getElementById('file-input');
 
     // fileInput.addEventListener('change', (e) => {
-    //     console.log(e.target.files)
-
+    //     alert('An image has been loaded');
     //     var file = e.target.files[0];
 
     //     if (file.type.match(/image.*/)) {
-    //         console.log('An image has been loaded');
+    //         alert('An image has been loaded');
 
     //         // Load the image
     //         var reader = new FileReader();
@@ -49,7 +48,7 @@ $(document).ready(function() {
     //             image.onload = function (imageEvent) {
 
     //                 // Resize the image
-    //                 var canvas = document.createElement('canvas'),
+    //                 var canvas = document.getElementById('canvas');
     //                     max_size = 300,// TODO : pull max size from a site config
     //                     width = image.width,
     //                     height = image.height;
@@ -86,42 +85,44 @@ $(document).ready(function() {
     var mediaStream = null;
 
 
-    $(function () {
-        var image = $("#logo");
-        $(".app__layout").hide();
-        image.click(function () {
-            var video = document.getElementById('video');
-            var canvas = document.getElementById('canvas');
-            var context = canvas.getContext('2d');
-            // Get access to the camera!
-            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                // Not adding `{ audio: true }` since we only want video now 
-                navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } }).then(function (stream) {
-                    //video.src = window.URL.createObjectURL(stream);
-                    video.srcObject = stream;
-                    video.play();
-                    $(".app__layout").show();
-                    $(".bg-lays").animate({
-                        width: "toggle"
-                    });
-                    setTimeout(function () {
-                        context.drawImage(video, 0, 0, 300, 300);
-                        triggerCallback()
-                    }, 4000);
-
-                    mediaStream = stream;
-                    mediaStream.stop = function () {
-                        this.getAudioTracks().forEach(function (track) {
-                            track.stop();
-                        });
-                        this.getVideoTracks().forEach(function (track) { //in case... :)
-                            track.stop();
-                        });
-                    };
+    var image = $("#logo");
+    $(".app__layout").hide();
+    image.click(function () {
+        var video = document.getElementById('video');
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+        // Get access to the camera!
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            // Not adding `{ audio: true }` since we only want video now 
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } }).then(function (stream) {
+                //video.src = window.URL.createObjectURL(stream);
+                video.srcObject = stream;
+                video.play();
+                $(".app__layout").show();
+                $(".bg-lays").animate({
+                    width: "toggle"
                 });
-            }
-            // Trigger photo take
-        });
+                setTimeout(function () {
+                    context.drawImage(video, 0, 0, 300, 300);
+                    triggerCallback()
+                }, 4000);
+
+                mediaStream = stream;
+                mediaStream.stop = function () {
+                    this.getAudioTracks().forEach(function (track) {
+                        track.stop();
+                    });
+                    this.getVideoTracks().forEach(function (track) { //in case... :)
+                        track.stop();
+                    });
+                };
+            });
+        }
+        else{
+            // $("#file-input").click()
+            alert("Image Scanning is not supported by this browser. Please try in different browser")
+        }
+        // Trigger photo take
     });
 
     if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
