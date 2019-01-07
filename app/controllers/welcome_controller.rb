@@ -59,7 +59,7 @@ class WelcomeController < ApplicationController
         url = "http://layslanded.visidots.com" if url.nil?
         render json: {url: url}
       else
-        render json: {msg: "<strong>Logo</strong> not recognized. Please try again!"}
+        render json: {msg: "<strong>Please</strong> Locate Lays Logo. Then Try Again!"}
       end
     end
   end
