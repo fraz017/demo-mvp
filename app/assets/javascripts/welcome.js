@@ -120,7 +120,7 @@ $(document).ready(function() {
         }
         else{
             // $("#file-input").click()
-            alert("Image Scanning is not supported by this browser. Please try in different browser")
+            alert("Scanning is not supported by this browser. Please use Safari browser and try again.")
         }
         // Trigger photo take
     });
