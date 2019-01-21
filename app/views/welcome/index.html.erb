@@ -5,19 +5,25 @@
         </div>
     </div>
     <video id="video" autoplay playsinline="true"></video>
-</div>  
-<div class="main">
-    <div class="container-lays">
-        <section class="bg-lays">
-            <div class="msg-alert alert alert-danger">      
-                    Hellow
-                </div>
-            <div class="scan-icon">
-                <button id="logo" class="btn-lays"><%= image_tag "LayScannerScreenFinal.png", width: "100%" %></button>
-            </div>
-        </section>
+</div>
+<section class="bg-lays">
+    <div class="overlay">
+        <div class="inner-body-loading">
+            <%= image_tag "loading.gif", class: "img-fluid" %>
+        </div>
     </div>
-<div>
+    <div class="deskktop">
+        <h2 class="pb-4">Please Visit On Your Mobile Device. </h2>
+        <a href="javascript:void(0)"><%= image_tag "logoXl.png", width: "400" %></a>
+    </div>
+    <div class="scan-icon">
+        <div class="msg-alert alert alert-danger">      
+        </div>
+        <button id="logo"><%= image_tag "logo.png", width: "250" %></button>
+        <a href="http://layslanded.visidots.com/help/" class="help"><span class="info">i</span> Need help?</a>
+        <input type="file" capture="environment" accept="image/*" id="file-input" class="upload-box upload" placeholder="Upload File" style="display:none;">
+    </div>
+</section>
 <footer>
 
 </footer>

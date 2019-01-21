@@ -1,168 +1,168 @@
 
-// body{
-//     font-family: 'Roboto', sans-serif;
-// }
-// #logo{
-//     background: transparent;
-//     border: 0;
-// }
-// #logo:focus{
-//     outline: 0;
-// }
-// .bg-lays{
-//     float: left;
-//     width: 100%;
-//     height: 85vh;
-//     background: asset-url('LaysScanPageLx.jpg');
-//     background-size:100% 100%;
-//     background-repeat: no-repeat;
-//     padding-top: 80px;
-//     text-align: center;
-//     position: relative;
-// }
-// .scan-icon{
-//     display:none;
-//     width: 250px;
-// }
-// .help,
-// .help:hover{
-//     width: 100%;
-//     float: left;
-//     color: #fff;
-//     text-decoration: none;
-//     text-align: right;
-//     padding: 5px 0;
-// }
-// footer{
-//     float: left;
-//     width: 100%;
-//     height: 15vh;
-//     background-color: #f6b91a;
-// }
-// .info{
-//     border:1px solid #fff;
-//     padding: 0 7.5px;
-//     border-radius: 100%;
-// }
-// .deskktop{
-//     color: #fff;
-// }
-// .overlay{
-//     position: absolute;
-//     width: 100%;
-//     height: 100vh;
-//     left:0;
-//     top:0;
-//     z-index: 999;
-//     // background-color: #f6b91a;
-//     background-color: #000000;
-//     text-align: center;
-//     justify-content: center;
-//     align-items: center;
-//     display:flex;
-// }
-
-// .overlay-image{
-//     position: absolute;
-//     left: 0;
-//     top: -15px;
-//     width: 100%;
-//     height: 100vh;
-//     z-index: 999;
-//     background: asset-url('overlay.png');
-//     background-size: 100% 100%;
-//     background-repeat: no-repeat;
-//     background-position: center;
-// }
-
-// .overlay-text{
-//     position: absolute;
-//     left: 0;
-//     z-index: 999;
-//     top: 0;
-//     color: #fff;
-//     height: 85px;
-//     background: #000;
-//     width: 100%;
-// }
-
-// .overlay-text p{
-//     margin:0;
-//     padding: 40px 0;
-//     text-align: center;
-//     font-size: 14px;
-// }
-
-// .inner-body-loading{
-// }
-// @media screen and (max-width: 800px) {
-//     .deskktop{
-//         display:none;
-//     }
-//     .bg-lays{
-//         float: left;
-//         width: 100%;
-//         height: 80vh;
-//         background: asset-url('LaysScanPageM.jpg');
-//         background-size:100% 100%;
-//         background-repeat: no-repeat;
-//         display: flex;
-//         justify-content: center;
-//         padding-top: 120px;
-//     }
-//     .scan-icon{
-//         display:block;
-//     }
-//     footer{
-
-//         height: 20vh;
-//     }
-// }
-
-
-
 body{
     font-family: 'Roboto', sans-serif;
 }
-.main{
-    float: left;
-    width: 100%;
-    background-color: #fbb808;
+#logo{
+    background: transparent;
+    border: 0;
 }
-.container-lays{
-    width: 100%;
-    max-width: 650px;
-    margin:0 auto;
+#logo:focus{
+    outline: 0;
 }
 .bg-lays{
     float: left;
     width: 100%;
-    height: 100vh;
-    background: asset-url('LayScannerScreenFinal.jpg');
+    height: 85vh;
+    background: asset-url('LaysScanPageLx.jpg');
     background-size:100% 100%;
     background-repeat: no-repeat;
+    padding-top: 80px;
     text-align: center;
-    align-items: flex-end;
-    display: flex;
-    justify-content: center;
+    position: relative;
 }
 .scan-icon{
-    width: 305px;
-    display: inline-block;
-    margin-bottom:12vh;
+    display:none;
+    width: 250px;
 }
-.btn-lays{
-    background-color: transparent;
-    border: 0;
-    outline: 0 !important;
-    cursor: pointer;
+.help,
+.help:hover{
+    width: 100%;
+    float: left;
+    color: #fff;
+    text-decoration: none;
+    text-align: right;
+    padding: 5px 0;
+}
+footer{
+    float: left;
+    width: 100%;
+    height: 15vh;
+    background-color: #f6b91a;
+}
+.info{
+    border:1px solid #fff;
+    padding: 0 7.5px;
+    border-radius: 100%;
+}
+.deskktop{
+    color: #fff;
+}
+.overlay{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    left:0;
+    top:0;
+    z-index: 999;
+    // background-color: #f6b91a;
+    background-color: #000000;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display:flex;
 }
 
+.overlay-image{
+    position: absolute;
+    left: 0;
+    top: -15px;
+    width: 100%;
+    height: 100vh;
+    z-index: 999;
+    background: asset-url('overlay.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 
-@media screen and (max-width: 510px) {
+.overlay-text{
+    position: absolute;
+    left: 0;
+    z-index: 999;
+    top: 0;
+    color: #fff;
+    height: 85px;
+    background: #000;
+    width: 100%;
+}
+
+.overlay-text p{
+    margin:0;
+    padding: 40px 0;
+    text-align: center;
+    font-size: 14px;
+}
+
+.inner-body-loading{
+}
+@media screen and (max-width: 800px) {
+    .deskktop{
+        display:none;
+    }
+    .bg-lays{
+        float: left;
+        width: 100%;
+        height: 80vh;
+        background: asset-url('LaysScanPageM.jpg');
+        background-size:100% 100%;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: center;
+        padding-top: 120px;
+    }
     .scan-icon{
-        width: 200px;
-        display: inline-block;
-        margin-bottom:15vh;
+        display:block;
+    }
+    footer{
+
+        height: 20vh;
     }
 }
+
+
+
+// body{
+//     font-family: 'Roboto', sans-serif;
+// }
+// .main{
+//     float: left;
+//     width: 100%;
+//     background-color: #fbb808;
+// }
+// .container-lays{
+//     width: 100%;
+//     max-width: 650px;
+//     margin:0 auto;
+// }
+// .bg-lays{
+//     float: left;
+//     width: 100%;
+//     height: 100vh;
+//     background: asset-url('LayScannerScreenFinal.jpg');
+//     background-size:100% 100%;
+//     background-repeat: no-repeat;
+//     text-align: center;
+//     align-items: flex-end;
+//     display: flex;
+//     justify-content: center;
+// }
+// .scan-icon{
+//     width: 305px;
+//     display: inline-block;
+//     margin-bottom:12vh;
+// }
+// .btn-lays{
+//     background-color: transparent;
+//     border: 0;
+//     outline: 0 !important;
+//     cursor: pointer;
+// }
+
+
+// @media screen and (max-width: 510px) {
+//     .scan-icon{
+//         width: 200px;
+//         display: inline-block;
+//         margin-bottom:15vh;
+//     }
+// }
