@@ -19,6 +19,7 @@
                 </div>
             <div class="scan-icon">
                 <button id="logo" class="btn-lays"><%= image_tag "LayScannerScreenFinal.png", width: "100%" %></button>
+                <input type="file" accept="image/*" id="file-input" capture="environment" style="display:none;">
             </div>
         </section>
     </div>
@@ -30,7 +31,7 @@
 <canvas id="canvas" width="300" height="300" style="display:none;"></canvas>
 
 <script type="text/javascript">
-    
+
 </script>
 
 <style>

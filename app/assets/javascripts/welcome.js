@@ -32,55 +32,55 @@ $(document).ready(function() {
         longitude = position.coords.longitude;
     }
 
-    // var fileInput = document.getElementById('file-input');
+    var fileInput = document.getElementById('file-input');
 
-    // fileInput.addEventListener('change', (e) => {
-    //     alert('An image has been loaded');
-    //     var file = e.target.files[0];
+    fileInput.addEventListener('change', (e) => {
+        var file = e.target.files[0];
 
-    //     if (file.type.match(/image.*/)) {
-    //         alert('An image has been loaded');
+        if (file.type.match(/image.*/)) {
 
-    //         // Load the image
-    //         var reader = new FileReader();
-    //         reader.onload = function (readerEvent) {
-    //             var image = new Image();
-    //             image.onload = function (imageEvent) {
+            // Load the image
+            var reader = new FileReader();
+            reader.onload = function (readerEvent) {
+                var image = new Image();
+                image.onload = function (imageEvent) {
 
-    //                 // Resize the image
-    //                 var canvas = document.getElementById('canvas');
-    //                     max_size = 300,// TODO : pull max size from a site config
-    //                     width = image.width,
-    //                     height = image.height;
-    //                 if (width > height) {
-    //                     if (width > max_size) {
-    //                         height *= max_size / width;
-    //                         width = max_size;
-    //                     }
-    //                 } else {
-    //                     if (height > max_size) {
-    //                         width *= max_size / height;
-    //                         height = max_size;
-    //                     }
-    //                 }
-    //                 canvas.width = width;
-    //                 canvas.height = height;
-    //                 canvas.getContext('2d').drawImage(image, 0, 0, width, height);
-    //                 var dataUrl = canvas.toDataURL('image/jpeg');
-    //                 var resizedImage = dataURLToBlob(dataUrl);
+                    // Resize the image
+                    var canvas = document.getElementById('canvas');
+                        max_size = 300,// TODO : pull max size from a site config
+                        width = image.width,
+                        height = image.height;
+                    if (width > height) {
+                        if (width > max_size) {
+                            height *= max_size / width;
+                            width = max_size;
+                        }
+                    } else {
+                        if (height > max_size) {
+                            width *= max_size / height;
+                            height = max_size;
+                        }
+                    }
+                    canvas.width = width;
+                    canvas.height = height;
+                    canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+                    var dataUrl = canvas.toDataURL('image/jpeg');
+                    var resizedImage = dataURLToBlob(dataUrl);
 
-    //                 $.event.trigger({
-    //                     type: "imageResized",
-    //                     blob: resizedImage,
-    //                     url: dataUrl
-    //                 });
+                    $.event.trigger({
+                        type: "imageResized",
+                        blob: resizedImage,
+                        url: dataUrl
+                    });
 
-    //             }
-    //             image.src = readerEvent.target.result;
-    //         }
-    //         reader.readAsDataURL(file);
-    //     }
-    // });
+                }
+                image.src = readerEvent.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // alert(DetectRTC.browser.isChrome || DetectRTC.browser.isFirefox || DetectRTC.browser.isOpera || DetectRTC.browser.isIE || DetectRTC.browser.isSafari || DetectRTC.browser.isEdge)
 
     var mediaStream = null;
 
@@ -116,11 +116,11 @@ $(document).ready(function() {
                         track.stop();
                     });
                 };
-            });
+            })
         }
         else{
-            // $("#file-input").click()
-            alert("Scanning is not supported by this browser. Please use Safari browser and try again.")
+            $("#file-input").click()
+            // alert("Scanning is not supported by this browser. Please use Safari browser and try again.")
         }
         // Trigger photo take
     });
@@ -171,12 +171,14 @@ $(document).ready(function() {
     }
 
     $(document).on("imageResized", function (event) {
-        mediaStream.stop();
+        if (mediaStream){
+            mediaStream.stop();
+            $(".bg-lays").show()
+            $(".app__layout").animate({
+                width: "toggle"
+            });
+        }
         // var data = new FormData($("form[id*='uploadImageForm']")[0]);
-        $(".bg-lays").show()
-        $(".app__layout").animate({
-            width: "toggle"
-        });
         if (event.blob && event.url) {
             var formData = new FormData();
             formData.append('id', id);
