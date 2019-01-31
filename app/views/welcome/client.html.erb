@@ -1,0 +1,82 @@
+<div class="app__layout">
+    <div class="overlay-image">
+        <div class="overlay-text">
+            <p> Center the logo inside for accurate scan</p>
+        </div>
+    </div>
+    <video id="video" autoplay playsinline="true"></video>
+</div>  
+<div class="main">
+    <div class="overlay">
+        <div class="inner-body-loading">
+            <% if @content.loading_image.attached? %>
+                <%= image_tag url_for(@content.loading_image), class: "img-fluid" %>
+            <% else %>
+                <%= image_tag "loading.gif", class: "img-fluid" %>
+            <% end %>
+        </div>
+    </div>
+    <div class="container-lays">
+        <section class="bg-lays">
+            <div class="msg-alert alert alert-danger alert-lays">   
+                Hello world    
+            </div>
+            <div class="scan-icon">
+                <button id="logo" class="btn-lays"><%= image_tag "LayScannerScreenFinal.png", width: "100%" %></button>
+            </div>
+            <input type="hidden" value="<%= @content.id %>" id="content-id">
+        </section>
+    </div>
+<div>
+<footer>
+
+</footer>
+
+<canvas id="canvas" width="300" height="300" style="display:none;"></canvas>
+
+<script type="text/javascript">
+    
+</script>
+
+<style>
+.app__layout {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #000000;
+}
+
+video{
+    transform: translateX(-50%) translateY(-50%);
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+}
+
+.overlay-image{
+    <% if @content.overlay_image.attached? %>
+        background: url("<%= url_for(@content.overlay_image) %>");
+    <% end %>
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.bg-lays{
+    <% if @content.background_image.attached? %>
+        background: url("<%= url_for(@content.background_image) %>");
+    <% end %>
+    background-size:100% 100%;
+    background-repeat: no-repeat;
+}
+.overlay{
+    width: 100%;
+    height: 100vh;
+    left:0;
+    top:0;
+}
+</style>

@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-title float-left"> Available Reset Time</h4>
+                <%= link_to "Add Reset Time", new_admin_restriction_path, class: "btn btn-primary float-right" %>
+            </div>
+            <div class="card-body">
+            <div class="table-responsive">
+                <table class="table tablesorter " id="">
+                    <thead class=" text-primary">
+                        <tr>
+                            <th>
+                                Page
+                            </th>
+                            <th>
+                                Time
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @restrictions.each do |restriction| %>
+                            <tr>
+                                <td>
+                                    <%= restriction.content.name %>
+                                </td>
+                                <td>
+                                    <%= restriction.limit %> <%= restriction.unit %>
+                                </td>
+                                <td class="text-center">
+                                    <%= link_to "<i class='tim-icons icon-pencil'></i>".html_safe, edit_admin_restriction_path(restriction), class: "btn btn-warning" %>
+                                    <%= link_to "<i class='tim-icons icon-trash-simple'></i>".html_safe, [:admin, restriction], class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+                                </td>
+                            </tr>
+                        <% end %>
+                        <%if @restrictions.count == 0 %>
+                            <tr>
+                                <td colspan="3"> No Reset Time Available </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

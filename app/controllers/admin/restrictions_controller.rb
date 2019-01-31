@@ -1,6 +1,10 @@
 class Admin::RestrictionsController < AdminController
   before_action :find_content, only: [:edit, :update, :destroy]
   
+  def index
+    @restrictions = Restriction.all
+  end
+
   def new
     @restriction = Restriction.new
   end
@@ -8,9 +12,9 @@ class Admin::RestrictionsController < AdminController
   def create
     @restriction = Restriction.new(restriction_params)
     if @restriction.save
-      redirect_to admin_contents_path, alert: "Restriction Created"
+      redirect_to admin_restrictions_path, alert: "Restriction Created"
     else
-      render 'admin/contents/new'
+      render 'new'
     end
   end
 
@@ -19,20 +23,20 @@ class Admin::RestrictionsController < AdminController
 
   def update
     if @restriction.update_attributes(restriction_params)
-      redirect_to admin_contents_path, alert: "Restriction Updated"
+      redirect_to admin_restrictions_path, alert: "Restriction Updated"
     else 
-      render 'admin/contents/edit'
+      render 'edit'
     end
   end
 
   def destroy
     @restriction.destroy
-    redirect_to admin_contents_path, alert: "Restriction Destroyed"
+    redirect_to admin_restrictions_path, alert: "Restriction Destroyed"
   end
 
   private
   def restriction_params
-    params.require(:restriction).permit(:limit, :unit)
+    params.require(:restriction).permit(:limit, :unit, :content_id)
   end
 
   def find_content

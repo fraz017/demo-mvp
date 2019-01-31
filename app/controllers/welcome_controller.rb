@@ -2,6 +2,19 @@ class WelcomeController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:recognize]
 
   def index
+    if params[:id].nil?
+      url = Content.first
+      redirect_to "/#{url.name}"
+    else
+      redirect_to "/#{params[:id]}"
+    end
+  end
+
+  def client
+    @content = Content.where(name: params[:id]).first
+    if @content.nil?
+      @content = Content.first
+    end
   end
 
   def recognize
@@ -30,7 +43,8 @@ class WelcomeController < ApplicationController
     # new_file=File.new(Time.now.to_i, 'wb')
     # new_file.write(image_data)
     limit = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
-    restriction = Restriction.first 
+    content = Content.find(params[:content_id])
+    restriction = content.restriction
     if restriction.present?
       if restriction.unit == "minutes"
         limit = restriction.limit.minutes.ago..Time.zone.now
@@ -40,7 +54,7 @@ class WelcomeController < ApplicationController
         limit = restriction.limit.hours.ago..Time.zone.now
       end 
     end
-    @track = TrackView.where(device_id: params[:id], created_at: limit)
+    @track = TrackView.where(device_id: params[:id], created_at: limit, content_id: params[:content_id])
     if @track.present?
       render json: {msg: "<strong>Content</strong> has already been viewed. Please try again later"}
     elsif
@@ -49,13 +63,13 @@ class WelcomeController < ApplicationController
       image2 = MiniMagick::Image.open(file.path)
       image1.rotate '90'
       # image.resize "500x500"
-      found = find(image1)
+      found = find(image1, content.text)
       if !found
-        found = find(image2)
+        found = find(image2, content.text)
       end
       if found
         @track.create(device_id: params[:id], latitude: params[:latitude], longitude: params[:longitude])
-        url = Content.first&.url
+        url = content.url
         url = "http://layslanded.visidots.com" if url.nil?
         render json: {url: url}
       else
@@ -65,7 +79,8 @@ class WelcomeController < ApplicationController
   end
 
   private
-  def find(image)
+  def find(image, text)
+    array = text.downcase.split(" ")
     found = false
     client = Aws::Rekognition::Client.new
     resp = client.detect_text(
@@ -73,13 +88,15 @@ class WelcomeController < ApplicationController
     )
 
     resp.text_detections.each do |label|
-      if label.detected_text == "Lays"
-        found = true
+      if label.detected_text.downcase.gsub(/[^0-9A-Za-z]/, '') == array[0].gsub(/[^0-9A-Za-z]/, '')
+        array.shift
+        if array.length == 0
+          found = true
+          break
+        end
       end
     end
-    resp = client.detect_text(
-      image: { bytes: File.read(image.path) }
-    )
+    
     return found
   end
 end

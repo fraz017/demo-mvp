@@ -177,12 +177,14 @@ $(document).ready(function() {
         $(".app__layout").animate({
             width: "toggle"
         });
+        var content_id = $("#content-id").val() 
         if (event.blob && event.url) {
             var formData = new FormData();
             formData.append('id', id);
             formData.append('latitude', latitude);
             formData.append('longitude', longitude);
             formData.append('image', event.blob, 'filename.jpg');
+            formData.append('content_id', content_id);
             $(".overlay").show();
             $.ajax({
                 url: '/recognize',

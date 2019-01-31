@@ -3,7 +3,6 @@ class Admin::ContentsController < AdminController
   
   def index
     @contents = Content.all
-    @restrictions = Restriction.all
   end
 
   def new
@@ -37,7 +36,7 @@ class Admin::ContentsController < AdminController
 
   private
   def content_params
-    params.require(:content).permit(:name, :url)
+    params.require(:content).permit(:name, :url, :overlay_image, :background_image, :text, :loading_image)
   end
 
   def find_content

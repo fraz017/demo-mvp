@@ -1,3 +1,4 @@
 class Restriction < ApplicationRecord
-    validates_presence_of :limit, :unit
+    belongs_to :content
+    validates_presence_of :limit, :unit 
 end

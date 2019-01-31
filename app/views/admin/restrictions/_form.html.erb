@@ -29,6 +29,12 @@
               </div>
               <div class="col-lg-6 col-sm-12 offset-lg-3">
                 <div class="form-group">
+                  <label>Select Page</label>
+                  <%= f.collection_select :content_id, Content.all, :id, :name, {:prompt => 'Please select a page'}, class: 'form-control' %>
+                </div>
+              </div>
+              <div class="col-lg-6 col-sm-12 offset-lg-3">
+                <div class="form-group">
                   <label>Time</label>
                   <%= f.number_field :limit, placeholder: "Limit", class: "form-control", min: 1 %>
                 </div>
