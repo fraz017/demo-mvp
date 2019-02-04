@@ -2,12 +2,7 @@ class WelcomeController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:recognize]
 
   def index
-    content = Content.first
-    if content.present?
-      redirect_to "/#{content.name}"
-    else
-      redirect_to "/error"
-    end
+    
   end
 
   def client
