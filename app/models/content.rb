@@ -1,6 +1,6 @@
 class Content < ApplicationRecord
     validates_presence_of :name, :url, :text
-    has_one :restriction
+    has_one :restriction, dependent: :destroy
 
     has_one_attached :background_image
     has_one_attached :overlay_image
