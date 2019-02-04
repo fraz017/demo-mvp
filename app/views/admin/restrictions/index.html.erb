@@ -24,7 +24,7 @@
                         <% @restrictions.each do |restriction| %>
                             <tr>
                                 <td>
-                                    <%= restriction.&content.name %>
+                                    <%= restriction.&content.&name %>
                                 </td>
                                 <td>
                                     <%= restriction.limit %> <%= restriction.unit %>
