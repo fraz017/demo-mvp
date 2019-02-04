@@ -4,7 +4,7 @@ class Content < ApplicationRecord
 
     has_one_attached :background_image
     has_one_attached :overlay_image
-    # has_one_attached :image
+    has_one_attached :scan_button
     has_one_attached :loading_image
 
     before_save :set_name

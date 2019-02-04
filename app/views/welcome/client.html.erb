@@ -22,7 +22,13 @@
                 Hello world    
             </div>
             <div class="scan-icon">
-                <button id="logo" class="btn-lays"><%= image_tag "LayScannerScreenFinal.png", width: "100%" %></button>
+                <button id="logo" class="btn-lays">
+                    <%if @content.scan_button.attached?%>
+                        <%= image_tag url_for(@content.scan_button), width: "100%" %>
+                    <% else %>    
+                        <%= image_tag "LayScannerScreenFinal.png", width: "100%" %>
+                    <% end %>
+                </button>
             </div>
             <input type="hidden" value="<%= @content.id %>" id="content-id">
         </section>

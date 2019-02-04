@@ -34,9 +34,15 @@ class Admin::ContentsController < AdminController
     redirect_to admin_contents_path, alert: "Content Destroyed"
   end
 
+  def delete_image_attachment
+    @image = ActiveStorage::Attachment.find(params[:id])
+    @image.purge
+    redirect_to request.referrer
+  end
+
   private
   def content_params
-    params.require(:content).permit(:name, :url, :overlay_image, :background_image, :text, :loading_image)
+    params.require(:content).permit(:name, :url, :overlay_image, :background_image, :text, :loading_image, :scan_button)
   end
 
   def find_content

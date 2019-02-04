@@ -20,40 +20,94 @@
                   <% end %>
                 </div>
               </div>
-              <div class="col-lg-6 col-sm-12 offset-lg-3">
+              <div class="col-lg-6 col-sm-12">
                 <div class="form-group">
                   <label>Name (Lower Case)</label>
                   <%= f.text_field :name, placeholder: "Name (pepsi, lays etc)", class: "form-control" %>
                 </div>
               </div>
-              <div class="col-lg-6 col-sm-12 offset-lg-3">
+              <div class="col-lg-6 col-sm-12">
                 <div class="form-group">
                   <label>Redirect Url</label>
                   <%= f.text_field :url, placeholder: "Redirect Url", class: "form-control" %>
                 </div>
               </div>
-              <div class="col-lg-6 col-sm-12 offset-lg-3">
+              <div class="col-lg-6 col-sm-12">
                 <div class="form-group">
                   <label>Text to detect</label>
                   <%= f.text_field :text, placeholder: "Lays or Pepsi", class: "form-control" %>
                 </div>
               </div>
-              <div class="col-lg-6 col-sm-12 offset-lg-3">
-                <div class="form-group">
-                  <label>Background Image for the page</label>
-                  <%= f.file_field :background_image, class: "form-control" %>
+              <div class="col-lg-12 col-sm-12 pb-3">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="btn-label">Background Image for the page</label>
+                      <%= f.file_field :background_image, class: "form-control cursor-pointer"  %>
+                    </div>
+                  </div>             
+                  <%if @content.background_image.attached? %>    
+                    <div class="col-6">
+                      <div class="position-relative">
+                        <%= image_tag url_for(@content.background_image), width: "125" %>
+                        <%= link_to '&#10006;'.html_safe, delete_image_attachment_admin_content_url(@content.background_image.id), class: "btn-cross", method: :delete, data: { confirm: 'Are you sure?' } %>
+                      </div>
+                    </div>     
+                  <% end %>
                 </div>
               </div>
-              <div class="col-lg-6 col-sm-12 offset-lg-3">
-                <div class="form-group">
-                  <label>Loading Image</label>
-                  <%= f.file_field :loading_image, class: "form-control" %>
+              <div class="col-lg-12 col-sm-12 pb-3">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="btn-label">Scan Button Image</label>
+                      <%= f.file_field :scan_button, class: "form-control cursor-pointer"  %>
+                    </div>
+                  </div>             
+                  <%if @content.scan_button.attached? %>    
+                    <div class="col-6">
+                      <div class="position-relative">
+                        <%= image_tag url_for(@content.scan_button), width: "125" %>
+                        <%= link_to '&#10006;'.html_safe, delete_image_attachment_admin_content_url(@content.scan_button.id), class: "btn-cross", method: :delete, data: { confirm: 'Are you sure?' } %>
+                      </div>
+                    </div>     
+                  <% end %>
                 </div>
               </div>
-              <div class="col-lg-6 col-sm-12 offset-lg-3">
-                <div class="form-group">
-                  <label>Overlay Image</label>
-                  <%= f.file_field :overlay_image, class: "form-control" %>
+              <div class="col-lg-12 col-sm-12 pb-3">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="btn-label">Loading Image</label>
+                      <%= f.file_field :loading_image, class: "form-control cursor-pointer" %>
+                    </div>
+                  </div>             
+                  <%if @content.loading_image.attached? %>    
+                    <div class="col-6">
+                      <div class="position-relative">
+                        <%= image_tag url_for(@content.loading_image), width: "125" %>
+                        <%= link_to '&#10006;'.html_safe, delete_image_attachment_admin_content_url(@content.loading_image.id), class: "btn-cross", method: :delete, data: { confirm: 'Are you sure?' } %>
+                      </div>
+                    </div>     
+                  <% end %>
+                </div>
+              </div>
+              <div class="col-lg-12 col-sm-12">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="btn-label">Overlay Image</label>
+                      <%= f.file_field :overlay_image, class: "form-control cursor-pointer" %>
+                    </div>
+                  </div>             
+                  <%if @content.overlay_image.attached? %>    
+                    <div class="col-6">
+                      <div class="position-relative">
+                        <%= image_tag url_for(@content.overlay_image), width: "125" %>
+                        <%= link_to '&#10006;'.html_safe, delete_image_attachment_admin_content_url(@content.overlay_image.id), class: "btn-cross", method: :delete, data: { confirm: 'Are you sure?' } %>
+                      </div>
+                    </div>     
+                  <% end %>
                 </div>
               </div>
             </div>
@@ -70,3 +124,27 @@
     </div>
   </div>
 </div>
+<style>
+  .btn-cross{
+    position:absolute;
+    left:95px;
+    top:3px;
+    color:#fff !important;
+    Background:transparent;
+    border:1px solid #fff;
+    cursor:pointer;
+    font-family: Poppins,sans-serif;
+    padding: 2px 6px;
+
+  }
+  .btn-label{
+    border:1px solid hsla(0,0%,100%,.6);
+    cursor:pointer !important;
+    padding:2px 5px;
+    font-size: .75rem;
+    margin-bottom: 5px;
+  }
+  .cursor-pointer{
+    cursor:pointer;
+  }
+</style>

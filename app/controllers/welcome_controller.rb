@@ -2,18 +2,19 @@ class WelcomeController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:recognize]
 
   def index
-    if params[:id].nil?
-      url = Content.first
-      redirect_to "/#{url.name}"
+    content = Content.first
+    if content.present?
+      redirect_to "/#{content.name}"
     else
-      redirect_to "/#{params[:id]}"
+      redirect_to "/error"
     end
   end
 
   def client
     @content = Content.where(name: params[:id]).first
     if @content.nil?
-      @content = Content.first
+      redirect_to "/error"
+    else
     end
   end
 
