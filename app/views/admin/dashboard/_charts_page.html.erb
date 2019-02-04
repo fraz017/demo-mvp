@@ -10,7 +10,7 @@
           <div class="col-sm-6">
             <div class="col-lg-6 col-sm-12 float-left">
               <div class="form-group">
-                <%= collection_select(nil, :page, Content.all, :name, :name, {:prompt => 'Please select a page'}, {class: 'form-control', :selected => params[:page]} ) %>
+                <%= collection_select(nil, :page, Content.all, :name, :name, {:prompt => 'Please select a page', :selected => params[:page]}, class: 'form-control') %>
               </div>
             </div>
             <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
