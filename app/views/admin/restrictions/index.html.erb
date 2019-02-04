@@ -24,7 +24,7 @@
                         <% @restrictions.each do |restriction| %>
                             <tr>
                                 <td>
-                                    <%= restriction.&content.&name %>
+                                    <%= restriction.content.present? ? restriction.content.name : "N/A" %>
                                 </td>
                                 <td>
                                     <%= restriction.limit %> <%= restriction.unit %>
