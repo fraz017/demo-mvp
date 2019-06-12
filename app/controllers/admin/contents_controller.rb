@@ -12,6 +12,7 @@ class Admin::ContentsController < AdminController
   def create
     @content = Content.new(content_params)
     if @content.save
+      Redirect.bulk_update_fuzzy_text
       redirect_to admin_contents_path, alert: "Content Created"
     else
       render 'new'
@@ -23,6 +24,7 @@ class Admin::ContentsController < AdminController
 
   def update
     if @content.update_attributes(content_params)
+      Redirect.bulk_update_fuzzy_text
       redirect_to admin_contents_path, alert: "Content Updated"
     else
       render 'edit'
@@ -42,7 +44,7 @@ class Admin::ContentsController < AdminController
 
   private
   def content_params
-    params.require(:content).permit(:name, :url, :overlay_image, :background_image, :text, :loading_image, :scan_button)
+    params.require(:content).permit(:name, :overlay_image, :background_image, :loading_image, :scan_button, redirects_attributes: [:id, :text, :url, :_destroy])
   end
 
   def find_content

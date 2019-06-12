@@ -59,13 +59,15 @@ class WelcomeController < ApplicationController
       image2 = MiniMagick::Image.open(file.path)
       image1.rotate '90'
       # image.resize "500x500"
-      found = find(image1, content.text)
+      # found = find(image1, content.text)
+      found = find(image1)
       if !found
-        found = find(image2, content.text)
+        # found = find(image2, content.text)
+        found = find(image2)
       end
-      if found
+      if found.present?
         @track.create(device_id: params[:id], latitude: params[:latitude], longitude: params[:longitude])
-        url = content.url
+        url = found.url
         url = "http://layslanded.visidots.com" if url.nil?
         render json: {url: url}
       else
@@ -75,21 +77,25 @@ class WelcomeController < ApplicationController
   end
 
   private
-  def find(image, text)
-    array = text.downcase.split(" ")
-    found = false
+  def find(image)
+    # array = text.downcase.split(" ")
+    found = nil
     client = Aws::Rekognition::Client.new
     resp = client.detect_text(
       image: { bytes: File.read(image.path) }
     )
 
     resp.text_detections.each do |label|
-      if label.detected_text.downcase.gsub(/[^0-9A-Za-z]/, '') == array[0].gsub(/[^0-9A-Za-z]/, '')
-        array.shift
-        if array.length == 0
-          found = true
-          break
-        end
+      # if label.detected_text.downcase.gsub(/[^0-9A-Za-z]/, '') == array[0].gsub(/[^0-9A-Za-z]/, '')
+      #   array.shift
+      #   if array.length == 0
+      #     found = "lays"
+      #     break
+      #   end
+      # end
+      found = Redirect.find_by_fuzzy_text(label.detected_text.downcase.gsub(/[^0-9A-Za-z]/, ''), :limit => 1).first
+      if found
+        break
       end
     end
     

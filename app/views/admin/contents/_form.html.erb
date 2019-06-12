@@ -26,18 +26,28 @@
                   <%= f.text_field :name, placeholder: "Name (pepsi, lays etc)", class: "form-control" %>
                 </div>
               </div>
+            </div>
+            <div class="row">  
+              <div class="col-lg-5 col-sm-12">
+                <div class="form-group">
+                  <label>Text to detect</label>
+                </div>
+              </div>
               <div class="col-lg-6 col-sm-12">
                 <div class="form-group">
                   <label>Redirect Url</label>
-                  <%= f.text_field :url, placeholder: "Redirect Url", class: "form-control" %>
                 </div>
               </div>
-              <div class="col-lg-6 col-sm-12">
-                <div class="form-group">
-                  <label>Text to detect</label>
-                  <%= f.text_field :text, placeholder: "Lays or Pepsi", class: "form-control" %>
-                </div>
-              </div>
+            </div>
+            <div id='redirects'>  
+              <%= f.fields_for :redirects do |r| %>
+                <%= render 'redirect_fields', :f => r %>
+              <% end %>
+              <%= link_to_add_association 'Add New Redirect', f, :redirects, class: "btn btn-success my-3" %>
+              
+            </div>
+
+            <div class="row">  
               <div class="col-lg-12 col-sm-12 pb-3">
                 <div class="row">
                   <div class="col-6">
@@ -124,6 +134,25 @@
     </div>
   </div>
 </div>
+<script>
+  $(document).on('turbolinks:load', function() {
+
+    $('form').on('click', '.remove_record', function(event) {
+      $(this).prev('input[type=hidden]').val('1');
+      $(this).closest('tr').hide();
+      return event.preventDefault();
+    });
+
+    $('form').on('click', '.add_fields', function(event) {
+      var regexp, time;
+      time = new Date().getTime();
+      regexp = new RegExp($(this).data('id'), 'g');
+      $('.fields').append($(this).data('fields').replace(regexp, time));
+      return event.preventDefault();
+    });
+  });
+
+</script>
 <style>
   .btn-cross{
     position:absolute;

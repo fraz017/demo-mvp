@@ -1,0 +1,19 @@
+<div class='row nested-fields'>
+  <div class="col-lg-5 col-sm-8">
+    <div class="form-group">
+      <%= f.text_field :text, placeholder: "Lays or Pepsi", class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="col-lg-5 col-sm-8">
+    <div class="form-group">
+      <%= f.text_field :url, placeholder: "Redirect Url", class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="col-lg-2 col-sm-4">
+    <div class="form-group">
+      <%= link_to_remove_association '<i class="tim-icons icon-simple-remove"></i>'.html_safe, f, class: "btn btn-sm btn-danger" %>
+    </div>
+  </div>
+</div>
