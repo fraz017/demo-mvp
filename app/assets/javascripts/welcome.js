@@ -103,7 +103,7 @@ $(document).ready(function() {
                     width: "toggle"
                 });
                 setTimeout(function () {
-                    context.drawImage(video, 0, 0, 300, 300);
+                    context.drawImage(video, 0, 0, 350, 350);
                     triggerCallback()
                 }, 4000);
 
