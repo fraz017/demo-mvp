@@ -103,6 +103,9 @@ class WelcomeController < ApplicationController
       puts "**********************"
       puts "**********************"
       puts "#{l}"
+      if name.present?
+        break
+      end
     end  
 
     if name.nil?
@@ -113,6 +116,9 @@ class WelcomeController < ApplicationController
         puts "**********************"
         puts "**********************"
         puts "#{w}"
+        if name.present?
+          break
+        end
       end
     end
 
