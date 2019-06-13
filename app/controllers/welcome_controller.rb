@@ -96,32 +96,36 @@ class WelcomeController < ApplicationController
     lines = r[:text_detections].map {|f| f [:detected_text] if f[:type] == "LINE"  }.compact!
     words = r[:text_detections].map {|f| f [:detected_text] if f[:type] == "WORD"  }.compact!  
     # text.each do |t|
-    lines.each do |l|
-      name = FuzzyMatch.new(text).find(l)
+    puts "**********************"
+    puts "#{lines}"
+    puts "**********************"
+    puts "**********************"
+    puts "#{words}"
+    puts "**********************"
+    text.each do |t|
+      name = FuzzyMatch.new(lines).find(t)
       puts "**********************"
-      puts "#{lines}"
-      puts "**********************"
-      puts "**********************"
-      puts "#{l}"
+      puts "#{t}"
       if name.present?
+        name = t
         break
       end
     end  
 
     if name.nil?
-      words.each do |w|
-        name = FuzzyMatch.new(text).find(w)
+      text.each do |t|
+        name = FuzzyMatch.new(words).find(t)
         puts "**********************"
-        puts "#{words}"
+        puts "#{t}"
         puts "**********************"
-        puts "**********************"
-        puts "#{w}"
         if name.present?
+          name = t
           break
         end
       end
     end
-
+    puts "**********************"
+    puts "**********************"
     puts "**********************"
     puts "**********************"
     puts "#{name}"
