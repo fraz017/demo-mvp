@@ -1,3 +1,4 @@
+require 'fuzzy_match'
 class WelcomeController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:recognize]
 
@@ -60,10 +61,10 @@ class WelcomeController < ApplicationController
       image1.rotate '90'
       # image.resize "500x500"
       # found = find(image1, content.text)
-      found = find(image1)
+      found = find(image1, params[:content_id])
       if !found
         # found = find(image2, content.text)
-        found = find(image2)
+        found = find(image2, params[:content_id])
       end
       if found.present?
         @track.create(device_id: params[:id], latitude: params[:latitude], longitude: params[:longitude])
@@ -77,28 +78,38 @@ class WelcomeController < ApplicationController
   end
 
   private
-  def find(image)
-    # array = text.downcase.split(" ")
-    found = nil
+  def find(image, content_id)
+    redirects = Redirect.where(content_id: content_id)
+    text = redirects.pluck(:text)
+    hash = Hash.new
+    redirects.each do |r|
+      hash[r.text] = r.url
+    end
+    name = ""
+    found = false
     client = Aws::Rekognition::Client.new
     resp = client.detect_text(
       image: { bytes: File.read(image.path) }
     )
 
-    resp.text_detections.each do |label|
-      # if label.detected_text.downcase.gsub(/[^0-9A-Za-z]/, '') == array[0].gsub(/[^0-9A-Za-z]/, '')
-      #   array.shift
-      #   if array.length == 0
-      #     found = "lays"
-      #     break
-      #   end
-      # end
-      found = Redirect.find_by_fuzzy_text(label.detected_text.downcase.gsub(/[^0-9A-Za-z]/, ''), :limit => 1).first
+    text.each do |t|
+      resp.text_detections.each do |label|
+        array = t.downcase.split(" ")
+        removable = FuzzyMatch.new(array).find(label.detected_text.downcase.gsub(/[^0-9A-Za-z]/, ''))
+        # if label.detected_text.downcase.gsub(/[^0-9A-Za-z]/, '') == array[0].gsub(/[^0-9A-Za-z]/, '')
+        array = array - [removable]
+        if array.length == 0
+          found = true
+          name = t
+          break
+        end
+        # end
+      end
       if found
         break
       end
     end
     
-    return found
+    return hash[name]
   end
 end

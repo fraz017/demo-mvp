@@ -12,7 +12,7 @@ class Admin::ContentsController < AdminController
   def create
     @content = Content.new(content_params)
     if @content.save
-      Redirect.bulk_update_fuzzy_text
+      # Redirect.bulk_update_fuzzy_text
       redirect_to admin_contents_path, alert: "Content Created"
     else
       render 'new'
@@ -24,7 +24,7 @@ class Admin::ContentsController < AdminController
 
   def update
     if @content.update_attributes(content_params)
-      Redirect.bulk_update_fuzzy_text
+      # Redirect.bulk_update_fuzzy_text
       redirect_to admin_contents_path, alert: "Content Updated"
     else
       render 'edit'

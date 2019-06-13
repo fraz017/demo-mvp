@@ -45,7 +45,8 @@ gem 'therubyracer'
 gem 'execjs'
 
 gem "cocoon"
-gem 'fuzzily'
+# gem 'fuzzily'
+gem 'fuzzy_match'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
