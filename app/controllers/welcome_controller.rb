@@ -94,22 +94,36 @@ class WelcomeController < ApplicationController
     )
 
     r = resp.to_h  
-    lines = r[:text_detections].map {|f| f [:detected_text] if f[:type] == "LINE"  }.compact!
+    # lines = r[:text_detections].map {|f| f [:detected_text] if f[:type] == "LINE"  }.compact!
     words = r[:text_detections].map {|f| f [:detected_text] if f[:type] == "WORD"  }.compact!  
-    lines.each do |l|
-      begin
-        record = Redirect.where(content_id: content_id).find_by_fuzzy_text(l, :limit => 1)
-        if record.present?
-          name = record.text
-          url = record.url
-          break
-        end
-      rescue
-        found = false
+    # lines.each do |l|
+    #   begin
+    #     record = Redirect.where(content_id: content_id).find_by_fuzzy_text(l, :limit => 1)
+    #     if record.present?
+    #       name = record.text
+    #       url = record.url
+    #       break
+    #     end
+    #   rescue
+    #     found = false
+    #   end
+    # end
+
+    text.each do |t|
+      temp = t.split(" ").map(&:downcase)
+      puts "**********************"
+      puts "#{temp}"
+      puts "**********************"
+      newwords = words.map(&:downcase)
+      puts "**********************"
+      puts "#{newwords}"
+      puts "**********************"
+      result = temp - newwords
+      if result.length == 0
+        name = t
+        break
       end
-    end
-
-
+    end  
     # text.each do |t|
     # puts "**********************"
     # puts "#{lines}"
@@ -172,6 +186,6 @@ class WelcomeController < ApplicationController
       # end
     # end
     
-    return url
+    return hash[name]
   end
 end
