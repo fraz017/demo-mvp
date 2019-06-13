@@ -93,7 +93,7 @@ class WelcomeController < ApplicationController
     )
 
     r = resp.to_h  
-    # lines = r[:text_detections].map {|f| f [:detected_text] if f[:type] == "LINE"  }.compact!
+    lines = r[:text_detections].map {|f| f [:detected_text] if f[:type] == "LINE"  }.compact!
     words = r[:text_detections].map {|f| f [:detected_text] if f[:type] == "WORD"  }.compact!  
     # text.each do |t|
     lines.each do |l|
