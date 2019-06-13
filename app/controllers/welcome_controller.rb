@@ -96,9 +96,9 @@ class WelcomeController < ApplicationController
     lines = r[:text_detections].map {|f| f [:detected_text] if f[:type] == "LINE"  }.compact!
     words = r[:text_detections].map {|f| f [:detected_text] if f[:type] == "WORD"  }.compact!  
     # text.each do |t|
-    # puts "**********************"
-    # puts "#{lines}"
-    # puts "**********************"
+    puts "**********************"
+    puts "#{lines}"
+    puts "**********************"
     # puts "**********************"
     # puts "#{words}"
     # puts "**********************"
