@@ -68,7 +68,7 @@ class WelcomeController < ApplicationController
       end
       if found.present?
         @track.create(device_id: params[:id], latitude: params[:latitude], longitude: params[:longitude])
-        url = found.url
+        url = found
         url = "http://layslanded.visidots.com" if url.nil?
         render json: {url: url}
       else
