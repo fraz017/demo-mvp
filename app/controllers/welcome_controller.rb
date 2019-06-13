@@ -96,6 +96,11 @@ class WelcomeController < ApplicationController
       resp.text_detections.each do |label|
         array = t.downcase.split(" ")
         # removable = FuzzyMatch.new(array).find(label.detected_text.downcase.gsub(/[^0-9A-Za-z]/, ''))
+        puts "**********************************"
+        puts "*"
+        puts "*            #{label}          "
+        puts "*"
+        puts "**********************************" 
         if label.detected_text.downcase.gsub(/[^0-9A-Za-z]/, '') == array[0].gsub(/[^0-9A-Za-z]/, '')
           array.shift
           # array = array - [removable]
