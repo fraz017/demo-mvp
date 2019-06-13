@@ -86,6 +86,7 @@ class WelcomeController < ApplicationController
       hash[r.text] = r.url
     end
     name = ""
+    url = ""
     # found = false
     client = Aws::Rekognition::Client.new
     resp = client.detect_text(
@@ -95,14 +96,28 @@ class WelcomeController < ApplicationController
     r = resp.to_h  
     lines = r[:text_detections].map {|f| f [:detected_text] if f[:type] == "LINE"  }.compact!
     words = r[:text_detections].map {|f| f [:detected_text] if f[:type] == "WORD"  }.compact!  
-    # text.each do |t|
-    puts "**********************"
-    puts "#{lines}"
-    puts "**********************"
+    lines.each do |l|
+      begin
+        record = Redirect.where(content_id: content_id).find_by_fuzzy_text(l, :limit => 1)
+        if record.present?
+          name = record.text
+          url = record.url
+          break
+        end
+      rescue
+        found = false
+      end
+    end
 
-    puts "**********************"
-    puts "#{text}"
-    puts "**********************"
+
+    # text.each do |t|
+    # puts "**********************"
+    # puts "#{lines}"
+    # puts "**********************"
+
+    # puts "**********************"
+    # puts "#{text}"
+    # puts "**********************"
     # puts "**********************"
     # puts "#{words}"
     # puts "**********************"
@@ -128,10 +143,10 @@ class WelcomeController < ApplicationController
     #     end
     #   end
     # end
-    name = FuzzyMatch.new(text).find(lines)
-    puts "**********************"
-    puts "**********************"
-    puts "**********************"
+    # name = FuzzyMatch.new(text).find(lines)
+    # puts "**********************"
+    # puts "**********************"
+    # puts "**********************"
     puts "**********************"
     puts "#{name}"
       # resp.text_detections.each do |label|
@@ -157,6 +172,6 @@ class WelcomeController < ApplicationController
       # end
     # end
     
-    return hash[name]
+    return url
   end
 end

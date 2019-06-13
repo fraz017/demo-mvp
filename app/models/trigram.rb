@@ -1,3 +1,3 @@
-# class Trigram < ApplicationRecord
-#   include Fuzzily::Model
-# end
+class Trigram < ApplicationRecord
+  include Fuzzily::Model
+end

@@ -45,7 +45,7 @@ gem 'therubyracer'
 gem 'execjs'
 
 gem "cocoon"
-# gem 'fuzzily'
+gem 'fuzzily'
 gem 'fuzzy_match'
 
 group :development, :test do

@@ -791,6 +791,8 @@ GEM
     erubi (1.8.0)
     execjs (2.7.0)
     ffi (1.9.25)
+    fuzzily (0.3.3)
+      activerecord (>= 2.3.17)
     fuzzy_match (2.1.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -949,6 +951,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   execjs
+  fuzzily
   fuzzy_match
   groupdate
   jbuilder (~> 2.5)
