@@ -99,6 +99,10 @@ class WelcomeController < ApplicationController
     puts "**********************"
     puts "#{lines}"
     puts "**********************"
+
+    puts "**********************"
+    puts "#{text}"
+    puts "**********************"
     # puts "**********************"
     # puts "#{words}"
     # puts "**********************"
