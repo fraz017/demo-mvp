@@ -93,7 +93,7 @@ class WelcomeController < ApplicationController
     )
 
     r = resp.to_h  
-    lines = r[:text_detections].map {|f| f [:detected_text] if f[:type] == "LINE"  }.compact!
+    # lines = r[:text_detections].map {|f| f [:detected_text] if f[:type] == "LINE"  }.compact!
     words = r[:text_detections].map {|f| f [:detected_text] if f[:type] == "WORD"  }.compact!  
     # text.each do |t|
       name = FuzzyMatch.new(text).find(lines)
@@ -105,6 +105,11 @@ class WelcomeController < ApplicationController
       if name.nil?
         name = FuzzyMatch.new(text).find(words)
       end
+      puts "**********************"
+      puts "**********************"
+      puts "#{name}"
+      
+
       # resp.text_detections.each do |label|
       #   array = t.downcase.split(" ")
       #   # removable = FuzzyMatch.new(array).find(label.detected_text.downcase.gsub(/[^0-9A-Za-z]/, ''))
