@@ -117,7 +117,7 @@ class WelcomeController < ApplicationController
       #       break
       #     end
       #   end
-      end
+      # end
       # if found
       #   break
       # end
