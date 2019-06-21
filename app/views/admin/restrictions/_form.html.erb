@@ -42,7 +42,7 @@
               <div class="col-lg-6 col-sm-12 offset-lg-3">
                 <div class="form-group">
                   <label>Select Period</label>
-                  <%= f.select :unit, options_for_select([["Select a Period", ""], ["minutes", "minutes"], ["hours", "hours"], ["days", "days"]], @restriction.unit), {}, class: 'form-control' %>
+                  <%= f.select :unit, options_for_select([["Select a Period", ""], ["seconds", "seconds"], ["minutes", "minutes"], ["hours", "hours"], ["days", "days"]], @restriction.unit), {}, class: 'form-control' %>
                 </div>
               </div>
             </div>

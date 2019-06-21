@@ -43,7 +43,9 @@ class WelcomeController < ApplicationController
     content = Content.find(params[:content_id])
     restriction = content.restriction
     if restriction.present?
-      if restriction.unit == "minutes"
+      if restriction.unit == "seconds"
+        limit = restriction.limit.seconds.ago..Time.zone.now
+      elsif restriction.unit == "minutes"
         limit = restriction.limit.minutes.ago..Time.zone.now
       elsif restriction.unit == "days"
         limit = restriction.limit.days.ago..Time.zone.now
