@@ -8,6 +8,11 @@ Rails.application.routes.draw do
       end
     end
     resources :restrictions
+    resource :users, only: [:edit] do
+      collection do
+        patch 'update_password'
+      end
+    end
     delete "destroy" => "dashboard#destroy_data"
   end
   post '/recognize' => 'welcome#recognize'
