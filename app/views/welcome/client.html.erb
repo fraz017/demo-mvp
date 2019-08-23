@@ -51,7 +51,9 @@
     overflow: hidden;
     background-color: #000000;
 }
-
+.main{
+        background-color:#ccc;
+    }
 video{
     transform: translateX(-50%) translateY(-50%);
     top: 50%;
@@ -69,7 +71,6 @@ video{
     <% end %>
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    background-position: center;
 }
 .bg-lays{
     <% if @content.background_image.attached? %>
@@ -77,6 +78,29 @@ video{
     <% end %>
     background-size:100% 100%;
     background-repeat: no-repeat;
+    background-position:center;
+}
+@media only screen and (orientation: landscape) {
+  .bg-lays{
+    <% if @content.background_image.attached? %>
+        background: url("<%= url_for(@content.background_image) %>");
+    <% end %>
+    background-color:#ccc;
+    background-size:60% 100%;
+    background-repeat: no-repeat;
+    background-position:center center;
+    /* background-attachment:fixed; */
+    height:680px;
+    }
+    
+    /* .btn-lays{
+        width:250px;
+    } */
+    /* .container-lays{
+        height:100% ;
+        float:left;
+        width:100%;
+    } */
 }
 .overlay{
     width: 100%;
@@ -84,4 +108,6 @@ video{
     left:0;
     top:0;
 }
+
+
 </style>
