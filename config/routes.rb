@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     end
     delete "destroy" => "dashboard#destroy_data"
   end
+
+  post '/api/v1/recognize-image' => 'welcome#recognize'
   post '/recognize' => 'welcome#recognize'
   get '/error' => 'welcome#error'
   get '/:id' => 'welcome#client'
