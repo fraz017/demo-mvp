@@ -116,7 +116,8 @@ class WelcomeController < ApplicationController
       puts "**********************"
       puts "#{temp}"
       puts "**********************"
-      newwords = words.map { |x| x.downcase.gsub(/[^0-9A-Za-z]/, '')}
+      newwords = ""
+      newwords = words.map { |x| x.downcase.gsub(/[^0-9A-Za-z]/, '')} if words.present?
       puts "**********************"
       puts "#{newwords}"
       puts "**********************"
