@@ -40,6 +40,10 @@ class Admin::SubadminsController < AdminController
   private
 
   def user_params
+    if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
+    end
     params.require(:user).permit(:password, :password_confirmation, :email, :content_id, :role)
   end
 
