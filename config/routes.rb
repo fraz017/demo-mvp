@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       end
     end
     resources :restrictions
+    resources :subadmins
     resource :users, only: [:edit] do
       collection do
         patch 'update_password'

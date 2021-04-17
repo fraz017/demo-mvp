@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-title float-left"> Available Users</h4>
+                <%= link_to "Add New User", new_admin_subadmin_path, class: "btn btn-primary float-right" %>
+            </div>
+            <div class="card-body">
+            <div class="table-responsive">
+                <table class="table tablesorter " id="">
+                    <thead class=" text-primary">
+                        <tr>
+                            <th>
+                                Page
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @users.each do |user| %>
+                            <tr>
+                                <td>
+                                    <%= user.content.present? ? user.content.name : "N/A" %>
+                                </td>
+                                <td>
+                                    <%= user.email %>
+                                </td>
+                                <td class="text-center">
+                                    <%= link_to "<i class='tim-icons icon-pencil'></i>".html_safe, edit_admin_subadmin_path(user), class: "btn btn-warning" %>
+                                    <%= link_to "<i class='tim-icons icon-trash-simple'></i>".html_safe, "/admin/subadmins/#{user.id}", class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+                                </td>
+                            </tr>
+                        <% end %>
+                        <%if @users.count == 0 %>
+                            <tr>
+                                <td colspan="3"> No Users Available </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

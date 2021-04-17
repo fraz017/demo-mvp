@@ -15,18 +15,26 @@
                 <p>Dashboard</p>
                 </a>
             </li>
-            <li>
-                <a href="/admin/contents">
-                <i class="tim-icons icon-settings"></i>
-                <p>Add New Pages</p>
-                </a>
-            </li>
-            <li>
-                <a href="/admin/restrictions">
-                <i class="tim-icons icon-settings"></i>
-                <p>Add Restrictions</p>
-                </a>
-            </li>
+            <% if current_user.present? && current_user.super? %>
+                <li>
+                    <a href="/admin/contents">
+                    <i class="tim-icons icon-settings"></i>
+                    <p>Add New Pages</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/restrictions">
+                    <i class="tim-icons icon-settings"></i>
+                    <p>Add Restrictions</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/subadmins">
+                    <i class="tim-icons icon-single-02"></i>
+                    <p>Add Users</p>
+                    </a>
+                </li>
+            <%end%>    
             <!--
             <li>
                 <a href="./map.html">

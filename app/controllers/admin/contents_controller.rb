@@ -1,4 +1,5 @@
 class Admin::ContentsController < AdminController
+  authorize_resource
   before_action :find_content, only: [:edit, :update, :destroy]
   
   def index

@@ -1,0 +1,49 @@
+class Admin::SubadminsController < AdminController
+  authorize_resource :user
+  before_action :authenticate_user!
+  before_action :find_user, only: [:edit, :update, :destroy]
+
+  def index
+    @users = User.where(role: 1)
+  end
+
+  def new
+    @subadmin = User.new
+  end
+
+  def create
+    @subadmin = User.new(user_params)
+    if @subadmin.save
+      redirect_to admin_subadmins_path, alert: "User Created"
+    else
+      render 'new'
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @subadmin.update_attributes(user_params)
+      redirect_to admin_subadmins_path, alert: "User Updated"
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @subadmin.destroy
+    redirect_to admin_subadmins_path, alert: "User Destroyed"
+  end
+
+
+  private
+
+  def user_params
+    params.require(:user).permit(:password, :password_confirmation, :email, :content_id, :role)
+  end
+
+  def find_user
+    @subadmin = User.find params[:id]
+  end
+end

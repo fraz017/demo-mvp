@@ -8,11 +8,17 @@
             <h2 class="card-title">Views</h2>
           </div>
           <div class="col-sm-6">
-            <div class="col-lg-6 col-sm-12 float-left">
-              <div class="form-group">
-                <%= collection_select(nil, :page, Content.all, :name, :name, {:include_blank => 'Please select a page', :selected => params[:page]}, { class: 'form-control'} ) %>
+            <% if current_user.present? && current_user.super? %>
+              <div class="col-lg-6 col-sm-12 float-left">
+                <div class="form-group">
+                  <%= collection_select(nil, :page, Content.all, :name, :name, {:include_blank => 'Please select a page', :selected => params[:page]}, { class: 'form-control'} ) %>
+                </div>
               </div>
-            </div>
+            <% else %>
+              <div class="col-lg-6 col-sm-12 float-left">
+                <h2> <%= current_user&.content&.name %> Reporting </h2>
+              </div>
+            <% end %>  
             <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
               <label class="btn btn-sm btn-primary btn-simple active" id="0">
                 <input type="radio" name="options" checked>
