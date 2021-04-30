@@ -30,7 +30,7 @@
               <div class="col-lg-6 col-sm-12 offset-lg-3">
                 <div class="form-group">
                   <label>Select Page</label>
-                  <%= f.collection_select(:content_ids, Content.all, :id, :name, {prompt: 'Please select a page'}, {multiple: true, class: "form-control"}) %>
+                  <%= f.collection_select(:content_ids, Content.all, :id, :name,{}, {multiple: true, class: "form-control"}) %>
                 </div>
               </div>
               <div class="col-lg-6 col-sm-12 offset-lg-3">
