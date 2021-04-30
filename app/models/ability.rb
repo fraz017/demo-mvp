@@ -9,6 +9,17 @@ class Ability
     else
       can :read, :dashboard
       can :read, :profile
+      can :create, Content do |c|
+        user.contents.count < user.page_count 
+      end
+      can :manage, Content do |c|
+        user.contents.collect(&:id).include?(c.id)
+      end
+
+      can :create, Restriction
+      can :manage, Restriction do |r|
+        user.contents.collect(&:id).include?(r.content_id)
+      end
     end
     
     # Define abilities for the passed in user here. For example:

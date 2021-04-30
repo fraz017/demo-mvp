@@ -24,7 +24,7 @@
                         <% @users.each do |user| %>
                             <tr>
                                 <td>
-                                    <%= user.content.present? ? user.content.name : "N/A" %>
+                                    <%= user.contents.present? ? user.contents.uniq.collect(&:name).join(",") : "N/A" %>
                                 </td>
                                 <td>
                                     <%= user.email %>

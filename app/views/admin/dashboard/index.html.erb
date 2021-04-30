@@ -16,7 +16,9 @@
               </div>
             <% else %>
               <div class="col-lg-6 col-sm-12 float-left">
-                <h2> <%= current_user&.content&.name %> Reporting </h2>
+                <div class="form-group">
+                  <%= collection_select(nil, :page, current_user.contents.uniq, :name, :name, {:include_blank => 'Please select a page', :selected => params[:page]}, { class: 'form-control'} ) %>
+                </div>
               </div>
             <% end %>  
             <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">

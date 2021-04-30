@@ -1,5 +1,5 @@
 class Admin::ContentsController < AdminController
-  authorize_resource
+  load_and_authorize_resource
   before_action :find_content, only: [:edit, :update, :destroy]
   
   def index
@@ -13,6 +13,7 @@ class Admin::ContentsController < AdminController
   def create
     @content = Content.new(content_params)
     if @content.save
+      @content.users << User.find(content_params[:user_ids].to_i) if current_user.sub? && content_params[:user_ids].present?
       Redirect.bulk_update_fuzzy_text
       redirect_to admin_contents_path, alert: "Content Created"
     else
@@ -45,7 +46,7 @@ class Admin::ContentsController < AdminController
 
   private
   def content_params
-    params.require(:content).permit(:name, :overlay_image, :background_image, :loading_image, :scan_button, redirects_attributes: [:id, :text, :url, :_destroy])
+    params.require(:content).permit(:name, :overlay_image, :background_image, :loading_image, :scan_button, :user_ids, redirects_attributes: [:id, :text, :url, :_destroy])
   end
 
   def find_content

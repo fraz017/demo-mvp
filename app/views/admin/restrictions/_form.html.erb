@@ -30,7 +30,11 @@
               <div class="col-lg-6 col-sm-12 offset-lg-3">
                 <div class="form-group">
                   <label>Select Page</label>
-                  <%= f.collection_select :content_id, Content.all, :id, :name, {:prompt => 'Please select a page'}, class: 'form-control' %>
+                  <%if current_user.super?%>
+                    <%= f.collection_select :content_id, Content.all, :id, :name, {:prompt => 'Please select a page'}, class: 'form-control' %>
+                  <%elsif current_user.sub?%>
+                    <%= f.collection_select :content_id, current_user.contents.uniq, :id, :name, {:prompt => 'Please select a page'}, class: 'form-control' %>
+                  <%end%>
                 </div>
               </div>
               <div class="col-lg-6 col-sm-12 offset-lg-3">

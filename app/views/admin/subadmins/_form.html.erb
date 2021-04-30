@@ -30,7 +30,7 @@
               <div class="col-lg-6 col-sm-12 offset-lg-3">
                 <div class="form-group">
                   <label>Select Page</label>
-                  <%= f.collection_select :content_id, Content.all, :id, :name, {:prompt => 'Please select a page'}, class: 'form-control' %>
+                  <%= f.collection_select(:content_ids, Content.all, :id, :name, {prompt: 'Please select a page'}, {multiple: true, class: "form-control"}) %>
                 </div>
               </div>
               <div class="col-lg-6 col-sm-12 offset-lg-3">
@@ -51,6 +51,19 @@
                 <div class="form-group">
                   <label>Confirm Password</label>
                   <%= f.password_field :password_confirmation, placeholder: "Confirm Password", class: "form-control" %>
+                </div>
+              </div>
+              <div class="col-lg-6 col-sm-12 offset-lg-3">
+                <div class="form-group">
+                  <label>Can Add How Many Pages?</label>
+                  <%= f.number_field :page_count, placeholder: "1", class: "form-control" %>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-sm-12 offset-lg-3">
+                <div class="form-group">
+                  <label>Redirects Per Page</label>
+                  <%= f.number_field :redirect_count, placeholder: "1", class: "form-control" %>
                 </div>
               </div>
             </div>

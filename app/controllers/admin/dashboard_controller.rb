@@ -33,7 +33,7 @@ class Admin::DashboardController < AdminController
         @mm = []
       end
     elsif current_user.sub?
-      id = current_user.content
+      id = current_user.contents.where(name: params[:page]).first
       if id.present?
         views = TrackView.where(content_id: id.id).group_by_hour(:created_at, range: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day, time_zone: Time.zone.name, format: "%-l %p").count
         @today = TrackView.where(content_id: id.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)

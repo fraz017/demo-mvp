@@ -122,6 +122,9 @@
               </div>
             </div>
           </div>
+          <%if current_user.sub?%>
+            <%= f.hidden_field :user_ids, value: current_user.id, class: "form-control cursor-pointer" %>
+          <%end%>  
           <div class="card-footer">
             <div>
               <div class="col-lg-6 col-sm-12 offset-lg-3">
@@ -135,8 +138,29 @@
   </div>
 </div>
 <script>
-  $(document).on('turbolinks:load', function() {
+  $(function() {
+    if(<%= current_user.sub? %>){
+      function check_to_hide_or_show_add_link() {
+        if ($('.nested-fields:visible').length == <%= current_user.redirect_count %>) {
+          $('#redirects').hide();
+        } else {
+          $('#redirects').show();
+        }
+      }
 
+      $('.card-body').on('cocoon:after-insert', function() {
+        check_to_hide_or_show_add_link();
+      });
+
+      $('.card-body').on('cocoon:after-remove', function() {
+        check_to_hide_or_show_add_link();
+      });
+
+      check_to_hide_or_show_add_link();
+    }
+    
+  })
+  $(document).on('turbolinks:load', function() {
     $('form').on('click', '.remove_record', function(event) {
       $(this).prev('input[type=hidden]').val('1');
       $(this).closest('tr').hide();

@@ -13,6 +13,7 @@ class Admin::SubadminsController < AdminController
 
   def create
     @subadmin = User.new(user_params)
+    @subadmin
     if @subadmin.save
       redirect_to admin_subadmins_path, alert: "User Created"
     else
@@ -44,7 +45,7 @@ class Admin::SubadminsController < AdminController
       params[:user].delete(:password)
       params[:user].delete(:password_confirmation)
     end
-    params.require(:user).permit(:password, :password_confirmation, :email, :content_id, :role)
+    params.require(:user).permit(:password, :password_confirmation, :email, :role, :redirect_count, :page_count, :content_ids)
   end
 
   def find_user

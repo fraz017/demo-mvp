@@ -5,5 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   enum role: [ :super, :sub ]
-  belongs_to :content
+  has_and_belongs_to_many :contents
 end
