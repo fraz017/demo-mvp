@@ -13,8 +13,10 @@ class Admin::SubadminsController < AdminController
 
   def create
     @subadmin = User.new(user_params)
-    @subadmin
     if @subadmin.save
+      user_params[:content_ids].reject { |c| c.empty? }.map(&:to_i).each do |id|
+        @subadmin.contents << Content.find(id)
+      end
       redirect_to admin_subadmins_path, alert: "User Created"
     else
       render 'new'
@@ -26,6 +28,9 @@ class Admin::SubadminsController < AdminController
 
   def update
     if @subadmin.update_attributes(user_params)
+      user_params[:content_ids].reject { |c| c.empty? }.map(&:to_i).each do |id|
+        @subadmin.contents << Content.find(id)
+      end
       redirect_to admin_subadmins_path, alert: "User Updated"
     else
       render 'edit'
@@ -45,7 +50,7 @@ class Admin::SubadminsController < AdminController
       params[:user].delete(:password)
       params[:user].delete(:password_confirmation)
     end
-    params.require(:user).permit(:password, :password_confirmation, :email, :role, :redirect_count, :page_count, :content_ids)
+    params.require(:user).permit(:password, :password_confirmation, :email, :role, :redirect_count, :page_count, content_ids: [])
   end
 
   def find_user
