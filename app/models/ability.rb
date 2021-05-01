@@ -10,15 +10,15 @@ class Ability
       can :read, :dashboard
       can :read, :profile
       can :create, Content do |c|
-        user.contents.count < user.page_count 
+        user.contents.uniq.count < user.page_count 
       end
       can :manage, Content do |c|
-        user.contents.collect(&:id).include?(c.id)
+        user.contents.uniq.collect(&:id).include?(c.id)
       end
 
       can :create, Restriction
       can :manage, Restriction do |r|
-        user.contents.collect(&:id).include?(r.content_id)
+        user.contents.uniq.collect(&:id).include?(r.content_id)
       end
     end
     

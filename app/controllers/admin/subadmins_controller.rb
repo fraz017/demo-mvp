@@ -15,7 +15,8 @@ class Admin::SubadminsController < AdminController
     @subadmin = User.new(user_params)
     if @subadmin.save
       user_params[:content_ids].reject { |c| c.empty? }.map(&:to_i).each do |id|
-        @subadmin.contents << Content.find(id)
+        content = Content.find(id)
+        @subadmin.contents << content unless user.contents.include?(content)
       end
       redirect_to admin_subadmins_path, alert: "User Created"
     else
@@ -29,7 +30,8 @@ class Admin::SubadminsController < AdminController
   def update
     if @subadmin.update_attributes(user_params)
       user_params[:content_ids].reject { |c| c.empty? }.map(&:to_i).each do |id|
-        @subadmin.contents << Content.find(id)
+        content = Content.find(id)
+        @subadmin.contents << content unless user.contents.include?(content)
       end
       redirect_to admin_subadmins_path, alert: "User Updated"
     else
