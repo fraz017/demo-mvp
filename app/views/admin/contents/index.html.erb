@@ -55,16 +55,17 @@
         </div>
     </div>
 </div>
-
-<div class="row">
-    <div class="col-md-12">
-        <div class="card ">
-            <div class="card-header">
-                <h4 class="card-title float-left"> Reset Data</h4>
-                <%= link_to "Clear Data", admin_destroy_path, class: "btn btn-lg btn-danger float-right", method: :delete, data: { confirm: 'Are you sure? All scans data will be deleted' } %>
-            </div>
-            <div class="card-body">
+<% if current_user.present? && current_user.super? %>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header">
+                    <h4 class="card-title float-left"> Reset Data</h4>
+                    <%= link_to "Clear Data", admin_destroy_path, class: "btn btn-lg btn-danger float-right", method: :delete, data: { confirm: 'Are you sure? All scans data will be deleted' } %>
+                </div>
+                <div class="card-body">
+                </div>
             </div>
         </div>
     </div>
-</div>
+<% end %>
