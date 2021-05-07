@@ -13,7 +13,7 @@ class Admin::ContentsController < AdminController
   def create
     @content = Content.new(content_params)
     if @content.save
-      user = User.find(content_params[:user_ids].to_i)
+      user = User.find(content_params[:user_ids].to_i) if content_params[:user_ids].present?
       @content.users << user if current_user.sub? && content_params[:user_ids].present? && !@content.users.include?(user)
       Redirect.bulk_update_fuzzy_text
       redirect_to admin_contents_path, alert: "Content Created"
